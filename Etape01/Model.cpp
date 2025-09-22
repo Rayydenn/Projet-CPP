@@ -4,6 +4,7 @@
 using namespace std;
 
 // Constructeurs
+
 // Test 3
 
 Model::Model(const char* name, int power, Engine engine, float basePrice)
@@ -19,7 +20,10 @@ Model::Model(const char* name, int power, Engine engine, float basePrice)
 
 Model::~Model()
 {
-    delete[] name;
+	if (name!=nullptr)
+	{
+		delete[] name;
+	}
 }
 
 
@@ -68,6 +72,23 @@ Engine Model::getEngine()
 	return engine;
 }
 */
+
+
+// Test 4
+Model::model1(const char* name, int power, Engine engine, float basePrice)
+{
+	this->name = new name[20];
+	strcpy(this->name, name);
+	this->power = power;
+	this->engine = engine;
+	this->basePrice = basePrice;
+}
+
+Model Model::model2(Model model1)
+{
+	strcpy(name, "2008 GT 1.2 PureTech 130 EAT8");
+}
+
 
 void Model::display()
 {

@@ -36,7 +36,7 @@ int main()
     cout << "Puissance    = " << model.getPower() << " Ch" << endl;
     cout << "Moteur       = " << model.getEngine() << endl;
     cout << "Prix de base = " << model.getBasePrice() << " euros" << endl;
-  }*/
+  }
   
   cout << endl << "(3) ***** Test du constructeur d'initialisation *************************" << endl;
   {
@@ -44,7 +44,7 @@ int main()
     model.display();
   }
 
-  /*
+  */
   cout << endl << "(4) ***** Test du constructeur de copie *********************************" << endl;
   {
     Model model1("2008 GT 1.2 PureTech 130 Man.6",130,Engine::Petrol,31400.0f);
@@ -60,7 +60,7 @@ int main()
     cout << "model1 (APRES) :" << endl;
     model1.display();
   }
-*/
+  
   /*
   cout << endl << "(5) ***** Test d'allocation dynamique (constructeur par defaut) *********" << endl;
   {
