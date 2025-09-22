@@ -6,7 +6,8 @@ using namespace std;
 // Constructeurs
 
 // Test 3
-
+/*
+// Constructeur d'initialisation
 Model::Model(const char* name, int power, Engine engine, float basePrice)
 {
 	this->name = new char[strlen(name) + 1];  
@@ -15,7 +16,41 @@ Model::Model(const char* name, int power, Engine engine, float basePrice)
     this->engine = engine;
     this->power = power;
     this->basePrice = basePrice;
+
+    //name = new char[20];
+    //power = 0;
+    //engine=Petrol:
+	//basePrice = 0;
 }
+
+*/
+
+
+
+// Constructeur de copie
+Model::Model(const char* nom, int puissance, Engine moteur, float prix)
+{
+	// setName(nom);
+	// setPower(puissance);
+	// setEngine(moteur);
+	// setBasePrice(prix);
+	name = new char[strlen(nom) + 1];
+	strcpy(name, nom);
+	power = puissance;
+	engine = moteur;
+	basePrice = prix;
+}
+
+Model::Model(Model &source)
+{
+	name = new char[20];
+	setName(source.getName());
+	//setName(source.name);
+	power = source.power;
+	engine = source.engine;
+	basePrice = source.basePrice;
+}
+
 
 
 Model::~Model()
@@ -29,9 +64,13 @@ Model::~Model()
 
 // Autres Fonctions
 // 2)
-/*
+
 void Model::setName(const char* modelname) 
 {
+	if (name!=nullptr)
+	{
+		delete[] name;
+	}
 	name = new char[strlen(modelname) + 1];
 	strcpy(name, modelname);
 }
@@ -51,8 +90,7 @@ void Model::setEngine(Engine e)
 	engine = e;
 }
 
-
-const char* Model::getName()
+char* Model::getName()
 {
 	return name;
 }
@@ -71,23 +109,7 @@ Engine Model::getEngine()
 {
 	return engine;
 }
-*/
 
-
-// Test 4
-Model::model1(const char* name, int power, Engine engine, float basePrice)
-{
-	this->name = new name[20];
-	strcpy(this->name, name);
-	this->power = power;
-	this->engine = engine;
-	this->basePrice = basePrice;
-}
-
-Model Model::model2(Model model1)
-{
-	strcpy(name, "2008 GT 1.2 PureTech 130 EAT8");
-}
 
 
 void Model::display()

@@ -11,10 +11,9 @@ private:
 	float basePrice;
 	Engine engine;
 
-	Model& Model::model1(const char*, int, Engine, float);
-	Model& Model::model2(Model);
 public:
-	Model(const char* name, int power, Engine engine, float basePrice);
+	Model(const char*, int, Engine, float);
+	Model(Model&);
 	~Model();
 
 	void display();
@@ -23,7 +22,7 @@ public:
 	void setEngine(Engine);
 	void setBasePrice(float);
 
-    const char* getName();
+    char* getName();
     int getPower();
     float getBasePrice();
     Engine getEngine();
