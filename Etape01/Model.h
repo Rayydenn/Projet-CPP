@@ -12,9 +12,18 @@ private:
 	Engine engine;
 
 public:
+	// Test 2 / 3
+	//Model(const char*, int, Engine, float);
+	// Test 4
+	//Model(const char*, int, Engine, float);
+	//Model(Model&);
+	// Test 5
+	//Model();
+	// Test 6
 	Model(const char*, int, Engine, float);
 	Model(Model&);
 	~Model();
+
 
 	void display();
 	void setName(const char*);

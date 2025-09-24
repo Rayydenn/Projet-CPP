@@ -4,7 +4,17 @@
 using namespace std;
 
 // Constructeurs
-
+// Test 2
+/*
+// Setters & Getters
+Model::Model(const char* nom, int puissance, Engine moteur, float prix)
+{
+	name = nom;
+	power = puissance;
+	engine = moteur;
+	basePrice = prix;
+}
+*/
 // Test 3
 /*
 // Constructeur d'initialisation
@@ -26,8 +36,9 @@ Model::Model(const char* name, int power, Engine engine, float basePrice)
 */
 
 
-
+// Test 4
 // Constructeur de copie
+/*
 Model::Model(const char* nom, int puissance, Engine moteur, float prix)
 {
 	// setName(nom);
@@ -50,8 +61,39 @@ Model::Model(Model &source)
 	engine = source.engine;
 	basePrice = source.basePrice;
 }
+*/
 
+// Test 5
+// Allocation dynamique (constructeur par défaut)
+/*
+Model::Model()
+{
+	name = nullptr;
+	basePrice = 0.0f;
+	power = 0;
+	engine = Petrol;
+}
+*/
 
+// Test 6
+Model::Model(const char* nom, int puissance, Engine moteur, float prix)
+{
+	name = new char[strlen(nom) + 1];
+	strcpy(name, nom);
+	power = puissance;
+	engine = moteur;
+	basePrice = prix;
+}
+
+Model::Model(Model &source)
+{
+	name = new char[20];
+	setName(source.getName());
+	//setName(source.name);
+	power = source.power;
+	engine = source.engine;
+	basePrice = source.basePrice;
+}
 
 Model::~Model()
 {

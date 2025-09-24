@@ -44,7 +44,7 @@ int main()
     model.display();
   }
 
-  */
+  
   cout << endl << "(4) ***** Test du constructeur de copie *********************************" << endl;
   {
     Model model1("2008 GT 1.2 PureTech 130 Man.6",130,Engine::Petrol,31400.0f);
@@ -61,7 +61,7 @@ int main()
     model1.display();
   }
   
-  /*
+  
   cout << endl << "(5) ***** Test d'allocation dynamique (constructeur par defaut) *********" << endl;
   {
     Model *p = new Model();
@@ -73,6 +73,8 @@ int main()
     cout << "Le prix de base de ce model est : " << p->getBasePrice() << " euros" << endl;
     delete p;
   }
+  */
+
 
   cout << endl << "(6) ***** Test d'allocation dynamique (constructeur de copie) ***********" << endl;
   {
@@ -86,7 +88,7 @@ int main()
     delete p;
     cout << "model1 (APRES) :" << endl;
     model1.display();
-  }*/
+  }
 
   return 0;
 }
