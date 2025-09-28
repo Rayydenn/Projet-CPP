@@ -8,13 +8,14 @@
 
 int main()
 {
+  /*
   std::cout << std::endl << "(1) ***** Test du constructeur par defaut de Car *******************************" << std::endl;
   {
     Car car;
     car.display();
-  }
+  }*/
 
-  /*
+  
   std::cout << std::endl << "(2) ***** Test des setters/getters *************************************************" << std::endl;
   {
     Car c;
@@ -26,7 +27,7 @@ int main()
     std::cout << "Model du projet : ";
     c.getModel().display();
   }
-
+/*
   std::cout << std::endl << "(3) ***** Test du constructeur d'initialisation de Car *************************" << std::endl;
   {
     Car c("Projet_508SW_MmeLoreille",Model("508SW Style 1.6 HDi",115,Engine::Diesel,28500.0f));

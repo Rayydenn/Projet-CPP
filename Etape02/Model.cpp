@@ -1,6 +1,13 @@
 #include "Model.h"
-/*
+
 using namespace std;
+
+Model::Model() {
+    name = nullptr;
+    power = 0;
+    basePrice = 0.0f;
+    engine = Petrol;
+}
 
 Model::Model(const char* nom, int puissance, Engine moteur, float prix)
 {
@@ -11,13 +18,14 @@ Model::Model(const char* nom, int puissance, Engine moteur, float prix)
 	strcpy(name, nom);
 }
 
+/*
 Model::~Model()
 {
 	if (name!=nullptr)
 	{
 		delete[] name;
 	}
-}
+}*/
 
 void Model::display()
 {
@@ -32,4 +40,4 @@ void Model::display()
 		case Electric: cout << "Electrique" << endl; break;
 		case Hybrid: cout << "Hybride" << endl; break;
 	}
-}*/
+}

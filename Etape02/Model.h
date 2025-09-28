@@ -6,8 +6,11 @@
 
 enum Engine {Petrol, Diesel, Electric, Hybrid};
 
+class Car;
+
 class Model
 {
+	friend class Car;
 private:
 	char *name;
 	int power;
@@ -15,8 +18,9 @@ private:
 	Engine engine;
 
 public:
+	Model();
 	Model(const char*, int, Engine, float);
-	~Model();
+	//~Model();
 
 	void display();
 };

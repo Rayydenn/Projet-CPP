@@ -5,7 +5,8 @@ using namespace std;
 
 Car::Car()
 {
-	name = new char[20];
+	name = new char[50];
+	model = Model();
 }
 
 Car::~Car()
@@ -23,25 +24,25 @@ void Car::setName(const char* nom)
 	name = new char[strlen(nom) + 1];
 	strcpy(name, nom);
 }
-/*
+
 void Car::setModel(Model modele)
 {
-	
+	model = modele;
 }
-*/
+
 char* Car::getName()
 {
 	return name;
 }
-/*
+
 Model Car::getModel()
 {
 	return model;
 }
-*/
+
 
 void Car::display()
 {
 	cout << "Nom: " << name << endl;
-	//model.display();
+	model.display();
 }
