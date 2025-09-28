@@ -38,6 +38,7 @@ int main()
     cout << "Prix de base = " << model.getBasePrice() << " euros" << endl;
   }
   
+  
   cout << endl << "(3) ***** Test du constructeur d'initialisation *************************" << endl;
   {
     Model model("308 Allure 1.6 Hybrid 5P",150,Engine::Hybrid,38650.0f);
