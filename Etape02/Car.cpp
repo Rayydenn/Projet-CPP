@@ -1,32 +1,47 @@
-#include <iostream>
 #include "Car.h"
-#include "Model.h"
-#include <cstring>
 
-void Car::setName(nom)
+using namespace std;
+
+
+Car::Car()
+{
+	name = new char[20];
+}
+
+Car::~Car()
+{
+	if (name!=nullptr)
+	{
+		delete[] name;
+	}
+}
+
+void Car::setName(const char* nom)
 {
 	if (name!=nullptr)
 		delete[] name;
 	name = new char[strlen(nom) + 1];
 	strcpy(name, nom);
 }
-
-void Car::setModel(modele)
+/*
+void Car::setModel(Model modele)
 {
 	
 }
-
+*/
+char* Car::getName()
+{
+	return name;
+}
+/*
+Model Car::getModel()
+{
+	return model;
+}
+*/
 
 void Car::display()
 {
-	cout << "Nom: " << name << " Puissance: " << power << " Prix: " << basePrice;
-
-	switch(engine)
-	{
-		case Petrol: cout << "Essence";break;
-		case Diesel: cout << "Diesel";break;
-		case Electric: cout << "Electrique";break;
-		case Hybrid: cout << "Hybride";break;
-	}
-	cout << endl;
+	cout << "Nom: " << name << endl;
+	//model.display();
 }

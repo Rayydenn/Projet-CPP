@@ -1,15 +1,13 @@
 #include <iostream>
 #include "Model.h"
 
-enum Engine {Petrol, Diesel, Electric, Hybrid};
-
 class Car
 {
 private:
 	char *name;
+	//Model model;
 
 public:
-	Model model;
 	Car();
 	~Car();
 	
@@ -19,5 +17,5 @@ public:
 	char* getName();
 	Model getModel();
 
-
+	void display();
 };
