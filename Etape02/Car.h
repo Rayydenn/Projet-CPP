@@ -12,6 +12,7 @@ private:
 
 public:
 	Car();
+	Car(const char* nom, Model modele);
 	~Car();
 	
 	void setName(const char*);

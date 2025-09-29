@@ -9,6 +9,12 @@ Car::Car()
 	model = Model();
 }
 
+Car::Car(const char* nom, Model modele)
+{
+	name = new char[strlen(nom) + 1];
+	model = modele;
+}
+
 Car::~Car()
 {
 	if (name!=nullptr)
@@ -43,6 +49,6 @@ Model Car::getModel()
 
 void Car::display()
 {
-	cout << "Nom: " << name << endl;
+	cout << "Nom du Projet: " << name << endl;
 	model.display();
 }
