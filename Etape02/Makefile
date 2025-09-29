@@ -1,5 +1,5 @@
 Test2: Test2a.cpp Model.o Car.o
-	g++ Test2a.cpp Model.o Car.o -o Test2av3
+	g++ Test2a.cpp Model.o Car.o -o Test2av4
 
 Model.o: Model.cpp Model.h
 	g++ Model.cpp -c

@@ -12,7 +12,15 @@ Car::Car()
 Car::Car(const char* nom, Model modele)
 {
 	name = new char[strlen(nom) + 1];
+	strcpy(name, nom);
 	model = modele;
+}
+
+Car::Car(Car &source)
+{
+	name = new char[50];
+	setName(source.getName());
+	model = source.model;
 }
 
 Car::~Car()

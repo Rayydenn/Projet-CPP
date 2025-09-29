@@ -31,7 +31,7 @@ void Model::display()
 {
 	cout << "Nom: " << name << endl 
 	<< "Puissance: " << power << endl 
-	<< "Prix: " << basePrice << endl;
+	<< "Prix: " << basePrice << " €" << endl;
 
 	switch(engine)
 	{

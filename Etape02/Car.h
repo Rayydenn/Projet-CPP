@@ -11,8 +11,11 @@ private:
 	Model model;
 
 public:
+	// Test 1 & 2
 	Car();
+	// Test 3
 	Car(const char* nom, Model modele);
+	Car(Car &source);
 	~Car();
 	
 	void setName(const char*);

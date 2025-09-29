@@ -27,7 +27,7 @@ int main()
     std::cout << "Model du projet : ";
     c.getModel().display();
   }
-  */
+  
 
   std::cout << std::endl << "(3) ***** Test du constructeur d'initialisation de Car *************************" << std::endl;
   {
@@ -37,7 +37,8 @@ int main()
     std::cout << "Model du projet : ";
     c.getModel().display();
   }
-/*
+  */
+
   std::cout << std::endl << "(4) ***** Test du constructeur de copie de Car *********************************" << std::endl;
   {
     Car c1("Projet_208GTi_MrLepresse",Model("208 GTi 1.6",200,Engine::Petrol,34100.0f));
@@ -53,7 +54,7 @@ int main()
     std::cout << "c1 (APRES) :" << std::endl;
     c1.display();
   }
-  */
+  
 
   return 0;
 }
