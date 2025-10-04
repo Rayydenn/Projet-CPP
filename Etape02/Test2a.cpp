@@ -14,7 +14,7 @@ int main()
     Car car;
     car.display();
   }
-
+*/
   
   std::cout << std::endl << "(2) ***** Test des setters/getters *************************************************" << std::endl;
   {
@@ -37,7 +37,7 @@ int main()
     std::cout << "Model du projet : ";
     c.getModel().display();
   }
-  */
+  
 
   std::cout << std::endl << "(4) ***** Test du constructeur de copie de Car *********************************" << std::endl;
   {
