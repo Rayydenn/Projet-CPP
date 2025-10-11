@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstring>
+using namespace std;
 
 enum Engine {Petrol, Diesel, Electric, Hybrid};
 
@@ -12,15 +13,14 @@ class Model
 {
 	friend class Car;
 private:
-	char *name;
+	string name;
 	int power;
 	float basePrice;
 	Engine engine;
 
 public:
 	Model();
-	Model(const char*, int, Engine, float);
-	//~Model();
+	Model(const string&, int, Engine, float);
 
 	void display();
 };

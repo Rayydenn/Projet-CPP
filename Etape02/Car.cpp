@@ -1,42 +1,31 @@
 #include "Car.h"
+#include <cstring>
 
 using namespace std;
 
 
 Car::Car()
 {
-	name = new char[50];
+	name = "";
 	model = Model();
 }
 
-Car::Car(const char* nom, Model modele)
+Car::Car(const string &nom, Model modele)
 {
-	name = new char[strlen(nom) + 1];
-	strcpy(name, nom);
+	name = nom;
 	model = modele;
 }
 
 Car::Car(Car &source)
 {
-	name = new char[50];
 	setName(source.getName());
 	model = source.model;
 }
 
-Car::~Car()
-{
-	if (name!=nullptr)
-	{
-		delete[] name;
-	}
-}
 
-void Car::setName(const char* nom)
+void Car::setName(const string &nom)
 {
-	if (name!=nullptr)
-		delete[] name;
-	name = new char[strlen(nom) + 1];
-	strcpy(name, nom);
+	name = nom;
 }
 
 void Car::setModel(Model modele)
@@ -44,7 +33,7 @@ void Car::setModel(Model modele)
 	model = modele;
 }
 
-char* Car::getName()
+string& Car::getName()
 {
 	return name;
 }

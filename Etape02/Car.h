@@ -3,25 +3,27 @@
 
 #include <iostream>
 #include "Model.h"
+#include <cstring>
+
+using namespace std;
 
 class Car
 {
 private:
-	char *name;
+	string name;
 	Model model;
 
 public:
 	// Test 1 & 2
 	Car();
 	// Test 3
-	Car(const char* nom, Model modele);
+	Car(const string& nom, Model modele);
 	Car(Car &source);
-	~Car();
 	
-	void setName(const char*);
+	void setName(const string&);
 	void setModel(Model m);
 
-	char* getName();
+	string &getName();
 	Model getModel();
 
 	void display();

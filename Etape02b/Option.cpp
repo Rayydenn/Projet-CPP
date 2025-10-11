@@ -5,44 +5,33 @@ namespace carconfig
 {
 	Option::Option()
 	{
-		Code[0] = '\0';
-		Label = nullptr;
+		Code = "";
+		Label = "";
 		Price = 0.0f;
 	}
 
-	Option::Option(const char* c,const char* nom, float prix)
+	Option::Option(const string& c,const string& nom, float prix)
 	{
-		strncpy(Code, c, 4);
-		Code[4] = '\0';
-		Label = new char[strlen(nom) + 1];
-		strcpy(Label, nom);
+		Code = c;
+		Label = nom;
 		Price = prix;
 	}
 
 	Option::Option(const Option &source)
 	{
-		strncpy(Code, source.Code, 4);
-		Code[4] = '\0';
-		Label = new char[strlen(source.Label) + 1];
-		strcpy(Label, source.Label);
+		Code = source.Code;
+		Label = source.Label;
 		Price = source.Price;
 	}
 
-	Option::~Option()
+	void Option::setCode(const string& c)
 	{
-		delete[] Label;
+		Code = c;
 	}
 
-	void Option::setCode(const char* c)
+	void Option::setLabel(const string& nom)
 	{
-		strcpy(Code, c);
-		Code[4] = '\0';
-	}
-
-	void Option::setLabel(const char* nom)
-	{
-		Label = new char[strlen(nom) + 1];
-		strcpy(Label, nom);
+		Label = nom;
 	}
 
 	void Option::setPrice(float prix)

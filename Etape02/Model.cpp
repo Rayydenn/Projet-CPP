@@ -1,31 +1,22 @@
 #include "Model.h"
+#include <cstring>
 
 using namespace std;
 
 Model::Model() {
-    name = nullptr;
+    name = "";
     power = 0;
     basePrice = 0.0f;
     engine = Petrol;
 }
 
-Model::Model(const char* nom, int puissance, Engine moteur, float prix)
+Model::Model(const string& nom, int puissance, Engine moteur, float prix)
 {
 	power = puissance;
 	basePrice = prix;
 	engine = moteur;
-	name = new char[strlen(nom) + 1];
-	strcpy(name, nom);
+	name = nom;
 }
-
-/*
-Model::~Model()
-{
-	if (name!=nullptr)
-	{
-		delete[] name;
-	}
-}*/
 
 void Model::display()
 {
