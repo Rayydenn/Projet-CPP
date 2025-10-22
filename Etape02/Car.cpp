@@ -22,6 +22,9 @@ Car::Car(Car &source)
 	model = source.model;
 }
 
+Car::~Car()
+{
+}
 
 void Car::setName(const string &nom)
 {

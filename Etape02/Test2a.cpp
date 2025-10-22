@@ -8,13 +8,13 @@
 
 int main()
 {
-  /*
+  
   std::cout << std::endl << "(1) ***** Test du constructeur par defaut de Car *******************************" << std::endl;
   {
     Car car;
     car.display();
   }
-*/
+
   
   std::cout << std::endl << "(2) ***** Test des setters/getters *************************************************" << std::endl;
   {

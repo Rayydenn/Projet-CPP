@@ -19,6 +19,7 @@ public:
 	// Test 3
 	Car(const string& nom, Model modele);
 	Car(Car &source);
+	~Car();
 	
 	void setName(const string&);
 	void setModel(Model m);
