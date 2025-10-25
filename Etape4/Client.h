@@ -1,22 +1,10 @@
 #pragma once
 #include <iostream>
-#include "Person.h"
+#include "Actor.h"
 #include <tuple>
 #include <string>
 
 using namespace std;
-
-class Actor : public Person
-{
-protected:
-	int Id;
-
-public:
-	Actor();
-	Actor(int, string, string);
-
-	void display();
-};
 
 class Client : public Actor
 {

@@ -1,20 +1,5 @@
 #include "Client.h"
 
-Actor::Actor()
-{
-	Id = -1;
-	lastName = "";
-	firstName = "";
-}
-
-Actor::Actor(int id, string nom, string prenom)
-{
-	Id = id;
-	lastName = nom;
-	firstName = prenom;
-}
-
-
 Client::Client()
 {
 	Gsm = "";
@@ -81,10 +66,10 @@ string Client::getGsm() const
 
 string Client::toString() const
 {
-	return "Client[Id: " + to_string(Id) 
+	return "Id: " + to_string(Id) 
 		  + ", Nom: " + lastName 
 		  + ", Prenom: " + firstName 
-		  + ", Gsm: " + Gsm + "]";
+		  + ", Gsm: " + Gsm;
 }
 
 string Client::tuple() const

@@ -1,1 +1,49 @@
 #pragma once
+#include <iostream>
+#include "Actor.h"
+#include <tuple>
+#include <string>
+
+using namespace std;
+
+class Employee: public Actor
+{
+private:
+	string Role;
+	string Login;
+	string *Password;
+
+public:
+	Employee();
+	Employee(string, string, int, string, string);
+	Employee(Employee& source);
+	~Employee();
+
+	static const string SELLER;
+    static const string ADMINISTRATIVE;
+
+    void setId(const int id);
+    void setLastName(const string nom);
+    void setFirstName(const string prenom);
+    void setLogin(const string login);
+    void setPassword(const string &pw);
+    void setRole(const string role);
+
+    int getId() const;
+    string getLastName() const;
+    string getFirstName() const;
+    string getLogin() const;
+    string getPassword() const;
+    string getRole() const;
+
+    string toString() const;
+    string tuple() const;
+
+    Employee& operator=(const Employee& source);
+
+    friend ostream& operator<<(ostream& os, const Employee& emp);
+
+    void resetPassword();
+
+    void display();
+};

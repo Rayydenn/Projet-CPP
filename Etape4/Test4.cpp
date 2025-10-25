@@ -26,7 +26,7 @@ int main()
     {
       case 1 : Essai1(); break;
       case 2 : Essai2(); break;
-      // case 3 : Essai3(); break;
+      case 3 : Essai3(); break;
       // case 4 : Essai4(); break;
       // case 5 : Essai5(); break;
       // case 6 : Essai6(); break;
@@ -150,69 +150,69 @@ void Essai2()
   cout << "--> c3 = " << c3 << endl;
 }
 
-// /***********************************************************************************************/
-// // A FAIRE : la classe Employee qui herite de Actor
-// //           contenant en plus une fonction (string), un login (string) et un mot de passe (string)
-// //           deux variables statiques constantes SELLER et ADMINISTRATIVE
-// void Essai3()
-// {
-//   cout << "----- 3.1 Test du constructeur par defaut ----------------------------------" << endl;
-//   Employee e1;
-//   cout << "--> Voici e1 : " << e1 << endl;
-//   cout << endl;
+/***********************************************************************************************/
+// A FAIRE : la classe Employee qui herite de Actor
+//           contenant en plus une fonction (string), un login (string) et un mot de passe (string)
+//           deux variables statiques constantes SELLER et ADMINISTRATIVE
+void Essai3()
+{
+  cout << "----- 3.1 Test du constructeur par defaut ----------------------------------" << endl;
+  Employee e1;
+  cout << "--> Voici e1 : " << e1 << endl;
+  cout << endl;
 
-//   cout << "----- 3.2 Test des setters -------------------------------------------------" << endl;
-//   e1.setLastName("Tombale");
-//   e1.setFirstName("Pierre");
-//   e1.setId(4);
-//   e1.setLogin("tombpier");
-//   e1.setPassword("azerty34");
-//   e1.setRole("Vendeur");
-//   cout << "--> Voici e1 (apres les setters) :" << e1 << endl;
-//   cout << endl;
+  cout << "----- 3.2 Test des setters -------------------------------------------------" << endl;
+  e1.setLastName("Tombale");
+  e1.setFirstName("Pierre");
+  e1.setId(4);
+  e1.setLogin("tombpier");
+  e1.setPassword("azerty34");
+  e1.setRole("Vendeur");
+  cout << "--> Voici e1 (apres les setters) :" << e1 << endl;
+  cout << endl;
 
-//   cout << "----- 3.3 Test des getters -------------------------------------------------" << endl;
-//   cout << "Nom          : " << e1.getLastName() << endl;
-//   cout << "Prenom       : " << e1.getFirstName() << endl;
-//   cout << "Id           : " << e1.getId() << endl;
-//   cout << "Login        : " << e1.getLogin() << endl;
-//   cout << "Mot de passe : " << e1.getPassword() << endl;
-//   cout << "Fonction     : " << e1.getRole() << endl;
-//   cout << endl;
+  cout << "----- 3.3 Test des getters -------------------------------------------------" << endl;
+  cout << "Nom          : " << e1.getLastName() << endl;
+  cout << "Prenom       : " << e1.getFirstName() << endl;
+  cout << "Id           : " << e1.getId() << endl;
+  cout << "Login        : " << e1.getLogin() << endl;
+  cout << "Mot de passe : " << e1.getPassword() << endl;
+  cout << "Fonction     : " << e1.getRole() << endl;
+  cout << endl;
 
-//   cout << "----- 3.4 Test du constructeur d'initialisation ----------------------------" << endl;
-//   Employee e2("Dugenou","Jean-Paul",2,"dugejean","Administratif");
-//   // Le pointeur password est initialise a nullptr. Le mot de passe ne peut etre modifie (intialise)
-//   // qu'avec la methode setPassword ou resetPassword (qui remet le pointeur a nullptr).
-//   e2.setPassword("qsdf1234");
-//   cout << "--> Voici e2 : " << e2 << endl; 
-//   cout << "Son mot de passe est : " << e2.getPassword() << endl;
-//   cout << endl;
+  cout << "----- 3.4 Test du constructeur d'initialisation ----------------------------" << endl;
+  Employee e2("Dugenou","Jean-Paul",2,"dugejean","Administratif");
+  // Le pointeur password est initialise a nullptr. Le mot de passe ne peut etre modifie (intialise)
+  // qu'avec la methode setPassword ou resetPassword (qui remet le pointeur a nullptr).
+  e2.setPassword("qsdf1234");
+  cout << "--> Voici e2 : " << e2 << endl; 
+  cout << "Son mot de passe est : " << e2.getPassword() << endl;
+  cout << endl;
 
-//   cout << "----- 3.5 Test des methodes tuple() et toString()  -------------------------" << endl;
-//   cout << "--> Pour e2 : " << endl;
-//   cout << "toString() : --" << e2.toString() << "--" << endl;
-//   cout << "tuple()    : --" << e2.tuple() << "--" << endl; 
-//   cout << endl;
+  cout << "----- 3.5 Test des methodes tuple() et toString()  -------------------------" << endl;
+  cout << "--> Pour e2 : " << endl;
+  cout << "toString() : --" << e2.toString() << "--" << endl;
+  cout << "tuple()    : --" << e2.tuple() << "--" << endl; 
+  cout << endl;
 
-//   cout << "----- 3.6 Allocation dynamique de Employee + test du constructeur de copie ------" << endl;
-//   cout << "--> Copie de e2..." << endl;
-//   Employee *p1 = new Employee(e2); // Vive le constructeur de copie !
-//   // Le constructeur de copie copie tout, y compris le mot de passe
-//   cout << "--> Voici la copie de e2 : " << *p1 << endl;
-//   cout << "Son mot de passe est : " << p1->getPassword() << endl;
-//   cout << "--> Destruction de la copie..." << endl;
-//   delete p1;
-//   cout << "--> Revoici e2 :" << e2 << endl;
-//   cout << "Son mot de passe est : " << e2.getPassword() << endl;
-//   cout << endl;
+  cout << "----- 3.6 Allocation dynamique de Employee + test du constructeur de copie ------" << endl;
+  cout << "--> Copie de e2..." << endl;
+  Employee *p1 = new Employee(e2); // Vive le constructeur de copie !
+  // Le constructeur de copie copie tout, y compris le mot de passe
+  cout << "--> Voici la copie de e2 : " << *p1 << endl;
+  cout << "Son mot de passe est : " << p1->getPassword() << endl;
+  cout << "--> Destruction de la copie..." << endl;
+  delete p1;
+  cout << "--> Revoici e2 :" << e2 << endl;
+  cout << "Son mot de passe est : " << e2.getPassword() << endl;
+  cout << endl;
 
-//   cout << "----- 3.7 Test de l'operateur d'affectation --------------------------------" << endl;
-//   Employee e3;
-//   cout << "--> Execution du code e3 = e2; :" << endl;
-//   e3 = e2;
-//   cout << "--> e3 = " << e3 << endl;
-// }
+  cout << "----- 3.7 Test de l'operateur d'affectation --------------------------------" << endl;
+  Employee e3;
+  cout << "--> Execution du code e3 = e2; :" << endl;
+  e3 = e2;
+  cout << "--> e3 = " << e3 << endl;
+}
 
 // /******************************************************************************************/
 // // A FAIRE : normalement rien dans vos classes...
