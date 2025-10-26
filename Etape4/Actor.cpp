@@ -4,11 +4,9 @@
 /*									CONSTRUCTEURS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Actor::Actor()
+Actor::Actor():Person()
 {
 	Id = -1;
-	lastName = "";
-	firstName = "";
 }
 
 Actor::Actor(int id, string nom, string prenom):Person(nom,prenom)

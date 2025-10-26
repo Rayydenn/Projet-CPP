@@ -23,16 +23,10 @@ public:
 	static const string SELLER;
     static const string ADMINISTRATIVE;
 
-    void setId(const int id);
-    void setLastName(const string nom);
-    void setFirstName(const string prenom);
     void setLogin(const string login);
     void setPassword(const string &pw);
     void setRole(const string role);
 
-    int getId() const;
-    string getLastName() const;
-    string getFirstName() const;
     string getLogin() const;
     string getPassword() const;
     string getRole() const;
@@ -45,6 +39,4 @@ public:
     friend ostream& operator<<(ostream& os, const Employee& emp);
 
     void resetPassword();
-
-    void display();
 };

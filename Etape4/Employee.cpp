@@ -7,7 +7,7 @@
 const string Employee::SELLER = "Vendeur";
 const string Employee::ADMINISTRATIVE = "Administratif";
 
-Employee::Employee()
+Employee::Employee():Actor()
 {
 	Role = "";
 	Login = "";
@@ -45,20 +45,6 @@ Employee::~Employee()
 /*									SETTERS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Employee::setLastName(const string nom)
-{
-	lastName = nom;
-}
-
-void Employee::setFirstName(const string prenom)
-{
-	firstName = prenom;
-}
-
-void Employee::setId(const int id)
-{
-	Id = id;
-}
 
 void Employee::setLogin(const string login)
 {
@@ -79,21 +65,6 @@ void Employee::setRole(const string role)
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /*									GETTERS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-int Employee::getId() const
-{
-	return Id;
-}
-
-string Employee::getLastName() const
-{
-	return lastName;
-}
-
-string Employee::getFirstName() const
-{
-	return firstName;
-}
 
 string Employee::getPassword() const
 {
@@ -157,15 +128,4 @@ ostream& operator<<(ostream& os, const Employee& emp)
 	os << emp.toString();
 
 	return os;
-}
-
-void Employee::display()
-{
-	cout << endl
-		 << "Id: " << Id << endl
-		 << "Nom: " << lastName << endl
-		 << "Prenom: " << firstName << endl
-		 << "Login: " << Login << endl
-		 << "Password: " << (Password ? *Password : "") << endl
-		 << "Role: " << Role << endl;
 }

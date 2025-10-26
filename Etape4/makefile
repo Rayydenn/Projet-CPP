@@ -1,5 +1,5 @@
 Test4: Test4.cpp Person.o Client.o Actor.o Employee.o
-			g++ Test4.cpp Person.o Client.o Actor.o Employee.o -o Test4
+			g++ Test4.cpp Person.o Client.o Actor.o Employee.o -o tet
 
 Employee.o: Employee.cpp Employee.h
 			g++ Employee.cpp -c
