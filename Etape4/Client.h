@@ -19,12 +19,10 @@ public:
 
 	void setLastName(string n);
 	void setFirstName(string f);
-	void setId(int id);
 	void setGsm(string tel);
 
 	string getLastName() const;
 	string getFirstName() const;
-	int getId() const;
 	string getGsm() const;
 
 	string tuple() const;

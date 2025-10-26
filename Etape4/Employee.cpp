@@ -1,8 +1,11 @@
 #include "Employee.h"
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*									CONSTRUCTEURS									*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const string SELLER = "Vendeur";
-const string ADMINISTRATIVE = "Administratif";
+const string Employee::SELLER = "Vendeur";
+const string Employee::ADMINISTRATIVE = "Administratif";
 
 Employee::Employee()
 {
@@ -11,21 +14,15 @@ Employee::Employee()
 	Password = nullptr;
 }
 
-Employee::Employee(string nom, string prenom, int id, string login, string role)
+Employee::Employee(string nom, string prenom, int id, string login, string role):Actor(id, nom, prenom)
 {
-	firstName = nom;
-	lastName = prenom;
-	Id = id;
 	Password = nullptr;
 	Login = login;
 	Role = role;
 }
 
-Employee::Employee(Employee& source)
+Employee::Employee(Employee& source):Actor(source)
 {
-	firstName = source.firstName;
-	lastName = source.lastName;
-	Id = source.Id;
 	Login = source.Login;
 	Role = source.Role;
 
@@ -43,6 +40,10 @@ Employee::~Employee()
 {
 	delete Password;
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*									SETTERS									*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Employee::setLastName(const string nom)
 {
@@ -66,14 +67,18 @@ void Employee::setLogin(const string login)
 
 void Employee::setPassword(const string &pw)
 {
-	if (!Password)
-        Password = new string(pw);
+   	delete Password;
+   	Password = new string(pw);
 }
 
 void Employee::setRole(const string role)
 {
 	Role = role;
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*									GETTERS									*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int Employee::getId() const
 {
@@ -105,19 +110,18 @@ string Employee::getRole() const
 	return Role;
 }
 
-string Employee::toString() const
-{
-	return "Id: " + to_string(Id)
-		 + ", Nom: " + lastName
-		 + ", Prenom: " + firstName
-		 + ", Login: " + Login
-		 + ", Password: " + (Password ? *Password : "")
-		 + ", Role: " + Role;
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*									TUPLE/STRING (PASSWORD RESET)									*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+string Employee::toString() const {
+    std::string prefix = (Role == SELLER) ? "V" : "A";
+    return "[" + prefix + std::to_string(Id) + "] " + lastName + " " + firstName;
 }
 
-string Employee::tuple() const
-{
-	return to_string(Id) + ", " + lastName + ", " + firstName + ", " + Login + ", " + (Password ? *Password : "") + ", " + Role;
+
+string Employee::tuple() const {
+    return std::to_string(Id) + ";" + lastName + ";" + firstName + ";" + Role;
 }
 
 void Employee::resetPassword() {
@@ -125,6 +129,9 @@ void Employee::resetPassword() {
     Password = nullptr;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*									OPERATEURS									*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Employee& Employee::operator=(const Employee& source)
 {

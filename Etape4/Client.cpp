@@ -1,5 +1,9 @@
 #include "Client.h"
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*									CONSTRUCTEURS									*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Client::Client()
 {
 	Gsm = "";
@@ -8,19 +12,13 @@ Client::Client()
 	lastName = "";
 }
 
-Client::Client(string nom, string prenom, int id, string tel)
+Client::Client(string nom, string prenom, int id, string tel):Actor(id,nom,prenom)
 {
-	Id = id;
-	firstName = prenom;
-	lastName = nom;
 	Gsm = tel;
 }
 
-Client::Client(const Client& source)
+Client::Client(const Client& source):Actor(source)
 {
-	Id = source.Id;
-	firstName = source.firstName;
-	lastName = source.lastName;
 	Gsm = source.Gsm;
 }
 
@@ -32,11 +30,6 @@ void Client::setLastName(string n)
 void Client::setFirstName(string f)
 {
 	firstName = f;
-}
-
-void Client::setId(int id)
-{
-	Id = id;
 }
 
 void Client::setGsm(string tel)
@@ -54,27 +47,17 @@ string Client::getFirstName() const
 	return firstName;
 }
 
-int Client::getId() const
-{
-	return Id;
-}
-
 string Client::getGsm() const
 {
 	return Gsm;
 }
 
-string Client::toString() const
-{
-	return "Id: " + to_string(Id) 
-		  + ", Nom: " + lastName 
-		  + ", Prenom: " + firstName 
-		  + ", Gsm: " + Gsm;
+string Client::toString() const {
+    return "[C" + std::to_string(Id) + "] " + lastName + " " + firstName;
 }
 
-string Client::tuple() const
-{
-	return to_string(Id) + ", " + lastName + ", " + firstName + ", " + Gsm;
+string Client::tuple() const {
+    return std::to_string(Id) + ";" + lastName + ";" + firstName + ";" + Gsm;
 }
 
 ostream& operator<<(ostream& os, const Client c)

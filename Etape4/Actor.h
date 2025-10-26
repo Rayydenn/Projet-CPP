@@ -14,4 +14,11 @@ protected:
 public:
 	Actor();
 	Actor(int, string, string);
+	virtual ~Actor();
+
+	void setId(int id);
+	int getId() const;
+
+	virtual string toString() const = 0;
+    virtual string tuple() const = 0;
 };

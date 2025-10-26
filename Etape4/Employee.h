@@ -17,7 +17,8 @@ public:
 	Employee();
 	Employee(string, string, int, string, string);
 	Employee(Employee& source);
-	~Employee();
+	virtual ~Employee();
+
 
 	static const string SELLER;
     static const string ADMINISTRATIVE;
