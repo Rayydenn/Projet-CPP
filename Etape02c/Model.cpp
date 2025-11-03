@@ -1,46 +1,98 @@
 #include "Model.h"
+#include <cstring>
+#include <iostream>
+using namespace std;
 
-using namespace carconfig;
-
+// Constructeurs
 Model::Model()
 {
-	Name = "";
-	Power = 0;
-	basePrice = 0.0f;
-	engine = Petrol;
+	name = new char[20];
+	setName(name);
+	setPower(0);
+	setEngine(Engine::Petrol);
+	setBasePrice(0.0);
 }
 
-Model::Model(const string& n, const int p, const Engine e, const float bp)
+Model::Model(const char* n, const int p, const Engine e, const float prix)
 {
-	Name = n;
-	Power = p;
-	basePrice = bp;
+	name = new char[20];
+	setName(n);
+	setPower(p);
+	setEngine(e);
+	setBasePrice(prix);
+}
+Model::Model(const Model &source)
+{
+	name = new char[20];
+	setName(source.getName());
+	setPower(source.getPower());
+	setEngine(source.getEngine());
+	setBasePrice(source.getBasePrice());
+}
+
+Model::~Model()
+{
+	delete[] name;
+}
+
+// SETTERS / GETTERS
+
+void Model::setName(const char* n) 
+{
+	if (name != nullptr)
+		delete[] name;
+	name = new char[strlen(n) + 1];
+	strcpy(name, n);
+}
+
+void Model::setPower(int p)
+{
+	power = p;
+}
+
+void Model::setBasePrice(float prix)
+{
+	basePrice = prix;
+}
+
+void Model::setEngine(Engine e)
+{
 	engine = e;
 }
 
-Model::Model(const Model &source)
+char* Model::getName() const
 {
-	Name = source.Name;
-	Power = source.Power;
-	basePrice = source.basePrice;
-	engine = source.engine;
+	return name;
 }
 
-float Model::getbasePrice()
+int Model::getPower() const
+{
+	return power;
+}
+
+float Model::getBasePrice() const
 {
 	return basePrice;
 }
 
-
-void Model::display()
+Engine Model::getEngine() const
 {
-	cout << "Nom: " << Name << endl << "Puissance: " << Power << endl << "Prix: " << basePrice << endl << "Moteur: ";
+	return engine;
+}
+
+// DISPLAY
+
+void Model::display() const
+{
+	cout << "Nom : " << name << " Puissance : " << power << " Moteur : ";
 
 	switch(engine)
 	{
-		case Petrol: cout << "Essence" << endl; break;
-		case Diesel: cout << "Diesel" << endl; break;
-		case Electric: cout << "Electrique" << endl; break;
-		case Hybrid: cout << "Hybride" << endl; break;
+		case Petrol: cout << "Essence"; break;
+		case Diesel: cout << "Diesel"; break;
+		case Electric: cout << "Electrique"; break;
+		case Hybrid: cout << "Hybride"; break;
 	}
+
+	cout << " Prix de Base : " << basePrice << " €" << endl;
 }

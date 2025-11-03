@@ -19,17 +19,17 @@ namespace carconfig
 
 	public:
 		Car();
-		Car(const string name, const Model m);
+		Car(const string name, const Model& m);
 		Car(const Car &source);
 
-		void display();
+		void display() const;
 		void addOption(const Option& option);
 		void setName(const string n);
-		void setModel(const Model m);
+		void setModel(const Model&);
 		void removeOption(const string);
-		Model getModel();
-		string getName();
-		float getPrice();
+		Model getModel() const;
+		string getName() const;
+		float getPrice() const;
 
 
 	};

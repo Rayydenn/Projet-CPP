@@ -16,7 +16,7 @@ using namespace std;
 
 int main()
 {
-  /*
+  
   cout << endl << "(1) ***** Test constructeur par defaut + display ************************" << endl;
   {
     Model model;
@@ -74,7 +74,7 @@ int main()
     cout << "Le prix de base de ce model est : " << p->getBasePrice() << " euros" << endl;
     delete p;
   }
-  */
+  
 
 
   cout << endl << "(6) ***** Test d'allocation dynamique (constructeur de copie) ***********" << endl;

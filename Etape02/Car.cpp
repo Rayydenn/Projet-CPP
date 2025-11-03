@@ -1,54 +1,54 @@
 #include "Car.h"
-#include <cstring>
 
-using namespace std;
-
+using namespace carconfig;
 
 Car::Car()
 {
-	name = "";
-	model = Model();
+	Name = "";
+	setModel(model);
 }
 
-Car::Car(const string &nom, Model modele)
+Car::Car(const string n, const Model& m)
 {
-	name = nom;
-	model = modele;
+	Name = n;
+	setModel(m);
 }
 
-Car::Car(Car &source)
+Car::Car(const Car& source)
 {
 	setName(source.getName());
-	model = source.model;
+	setModel(source.getModel());
 }
 
 Car::~Car()
 {
 }
 
-void Car::setName(const string &nom)
+void Car::setName(const string n)
 {
-	name = nom;
+	Name = n;
 }
 
-void Car::setModel(Model modele)
+void Car::setModel(const Model& m)
 {
-	model = modele;
+	model.setName(m.getName());
+	model.setPower(m.getPower());
+	model.setBasePrice(m.getBasePrice());
+	model.setEngine(m.getEngine());
 }
 
-string& Car::getName()
-{
-	return name;
-}
-
-Model Car::getModel()
+Model Car::getModel() const
 {
 	return model;
 }
 
-
-void Car::display()
+string Car::getName() const
 {
-	cout << "Nom du Projet: " << name << endl;
+	return Name;
+}
+
+void Car::display() const
+{
+	cout << "Nom du Projet: " << Name << endl;
 	model.display();
 }

@@ -2,20 +2,18 @@
 #include "Model.h"
 #include "Car.h"
 
-// using namespace carconfig;
+using namespace carconfig;
 
 // Tests de base de la classe Car (sans les options)
 
 int main()
 {
-  
   std::cout << std::endl << "(1) ***** Test du constructeur par defaut de Car *******************************" << std::endl;
   {
     Car car;
     car.display();
   }
 
-  
   std::cout << std::endl << "(2) ***** Test des setters/getters *************************************************" << std::endl;
   {
     Car c;
@@ -27,7 +25,6 @@ int main()
     std::cout << "Model du projet : ";
     c.getModel().display();
   }
-  
 
   std::cout << std::endl << "(3) ***** Test du constructeur d'initialisation de Car *************************" << std::endl;
   {
@@ -37,7 +34,6 @@ int main()
     std::cout << "Model du projet : ";
     c.getModel().display();
   }
-  
 
   std::cout << std::endl << "(4) ***** Test du constructeur de copie de Car *********************************" << std::endl;
   {
@@ -54,7 +50,6 @@ int main()
     std::cout << "c1 (APRES) :" << std::endl;
     c1.display();
   }
-  
 
   return 0;
 }

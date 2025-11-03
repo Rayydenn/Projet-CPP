@@ -16,17 +16,16 @@ namespace carconfig
 
 		public:
 			Option();
-			Option(const string&, const string&, const float);
+			Option(const string, const string, const float);
 			Option(const Option &source);
 
-			void setCode(const string c);
-			void setPrice(const float p);
+			void setCode(const string n);
 			void setLabel(const string l);
-
+			void setPrice(const float p);
 
 			string getCode() const;
-			float getPrice() const;
 			string getLabel() const;
+			float getPrice() const;
 
 			friend istream& operator>>(istream& is, Option& opt);
         	friend ostream& operator<<(ostream& os, const Option& opt);

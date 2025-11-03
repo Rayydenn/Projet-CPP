@@ -1,47 +1,31 @@
 #include "Option.h"
-#include <limits>
 
 using namespace carconfig;
 
 Option::Option()
 {
-	Code = "";
-	Label = "";
-	Prix = 0.0f;
+	setCode("FFFF");
+	setLabel("Default");
+	setPrice(0.0);
 }
 
-Option::Option(const string& c, const string& l, const float p)
+Option::Option(const string c, const string l, const float p)
 {
-	Code = c;
-	Label = l;
-	Prix = p;
+	setCode(c);
+	setLabel(l);
+	setPrice(p);
 }
 
 Option::Option(const Option& source)
 {
-	Code = source.Code;
-	Label = source.Label;
-	Prix = source.Prix;
+	setCode(source.getCode());
+	setLabel(source.getLabel());
+	setPrice(source.getPrice());
 }
 
-string Option::getCode() const
+void Option::setCode(const string n)
 {
-	return Code;
-}
-
-float Option::getPrice() const
-{
-	return Prix;
-}
-
-string Option::getLabel() const
-{
-	return Label;
-}
-
-void Option::setCode(const string c)
-{
-	Code = c;
+	Code = n;
 }
 
 void Option::setLabel(const string l)
@@ -53,6 +37,22 @@ void Option::setPrice(const float p)
 {
 	Prix = p;
 }
+
+string Option::getCode() const
+{
+	return Code;
+}
+
+string Option::getLabel() const
+{
+	return Label;
+}
+
+float Option::getPrice() const
+{
+	return Prix;
+}
+
 
 namespace carconfig
 {
@@ -69,7 +69,7 @@ namespace carconfig
 			is >> code;
 		}
 
-		is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		is.ignore();
 
 		cout << "Entrez le nom de l'option: " << endl;
 		getline(is, label);

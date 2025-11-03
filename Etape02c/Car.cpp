@@ -5,23 +5,23 @@ using namespace carconfig;
 Car::Car()
 {
 	Name = "";
-	model = Model();
+	setModel(model);
 	for (int i = 0; i < 5; i++)
         option[i] = nullptr;
 }
 
-Car::Car(const string n, const Model m)
+Car::Car(const string n, const Model& m)
 {
 	Name = n;
-	model = m;
+	setModel(m);
 	for (int i = 0; i < 5; i++)
 		option[i] = nullptr; 
 }
 
 Car::Car(const Car& source)
 {
-	Name = source.Name;
-	model = source.model;
+	setName(source.getName());
+	setModel(source.getModel());
 	for (int i = 0; i < 5; i++)
     {
         if (source.option[i] != nullptr)
@@ -50,9 +50,12 @@ void Car::setName(const string n)
 	Name = n;
 }
 
-void Car::setModel(const Model m)
+void Car::setModel(const Model& m)
 {
-	model = m;
+	model.setName(m.getName());
+	model.setPower(m.getPower());
+	model.setBasePrice(m.getBasePrice());
+	model.setEngine(m.getEngine());
 }
 
 void Car::removeOption(const string c)
@@ -70,17 +73,17 @@ void Car::removeOption(const string c)
 	cout << "Option " << c << " non trouvée." << endl;
 }
 
-Model Car::getModel()
+Model Car::getModel() const
 {
 	return model;
 }
 
-string Car::getName()
+string Car::getName() const
 {
 	return Name;
 }
 
-float Car::getPrice()
+float Car::getPrice() const
 {
 	float total = 0.0f;
 	for (int i = 0; i < 5;i++)
@@ -91,11 +94,11 @@ float Car::getPrice()
 		}
 	}
 
-	total += model.getbasePrice();
+	total += model.getBasePrice();
 	return total;
 }
 
-void Car::display()
+void Car::display() const
 {
 	cout << "Nom du Projet: " << Name << endl;
 	model.display();

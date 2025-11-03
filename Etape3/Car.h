@@ -22,6 +22,7 @@ namespace carconfig
 		Car();
 		Car(const string name, const Model m);
 		Car(const Car &source);
+		~Car();
 
 		void display() const;
 		void addOption(const Option& option);

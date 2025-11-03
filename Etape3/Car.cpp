@@ -32,6 +32,15 @@ Car::Car(const Car& source)
     }
 }
 
+Car::~Car()
+{
+	for (int i = 0; i < 5; ++i)
+    {
+        delete option[i];
+        option[i] = nullptr;
+    }
+}
+
 void Car::addOption(const Option& opt)
 {
 	for (int i = 0; i <5;i++)
@@ -55,7 +64,7 @@ void Car::setModel(const Model& m)
 {
 	model.setName(m.getName());
 	model.setPower(m.getPower());
-	model.setbasePrice(m.getbasePrice());
+	model.setBasePrice(m.getBasePrice());
 	model.setEngine(m.getEngine());
 }
 
@@ -95,7 +104,7 @@ float Car::getPrice() const
 		}
 	}
 
-	total += model.getbasePrice();
+	total += model.getBasePrice();
 	return total;
 }
 

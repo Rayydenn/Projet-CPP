@@ -4,117 +4,45 @@
 using namespace std;
 
 // Constructeurs
-// Test 2
-/*
-// Setters & Getters
-Model::Model(const char* nom, int puissance, Engine moteur, float prix)
-{
-	name = nom;
-	power = puissance;
-	engine = moteur;
-	basePrice = prix;
-}
-*/
-// Test 3
-/*
-// Constructeur d'initialisation
-Model::Model(const char* name, int power, Engine engine, float basePrice)
-{
-	this->name = new char[strlen(name) + 1];  
-    strcpy(this->name, name);
-
-    this->engine = engine;
-    this->power = power;
-    this->basePrice = basePrice;
-
-    //name = new char[20];
-    //power = 0;
-    //engine=Petrol:
-	//basePrice = 0;
-}
-
-*/
-
-
-// Test 4
-// Constructeur de copie
-/*
-Model::Model(const char* nom, int puissance, Engine moteur, float prix)
-{
-	// setName(nom);
-	// setPower(puissance);
-	// setEngine(moteur);
-	// setBasePrice(prix);
-	name = new char[strlen(nom) + 1];
-	strcpy(name, nom);
-	power = puissance;
-	engine = moteur;
-	basePrice = prix;
-}
-
-Model::Model(Model &source)
-{
-	name = new char[20];
-	setName(source.getName());
-	//setName(source.name);
-	power = source.power;
-	engine = source.engine;
-	basePrice = source.basePrice;
-}
-*/
-
-// Test 5
-// Allocation dynamique (constructeur par défaut)
-/*
 Model::Model()
 {
-	name = nullptr;
-	basePrice = 0.0f;
-	power = 0;
-	engine = Petrol;
+	name = new char[20];
+	setName(name);
+	setPower(0);
+	setEngine(Engine::Petrol);
+	setBasePrice(0.0);
 }
-*/
 
-// Test 6
-Model::Model(const char* nom, int puissance, Engine moteur, float prix)
+Model::Model(const char* n, const int p, const Engine e, const float prix)
 {
-	name = new char[strlen(nom) + 1];
-	strcpy(name, nom);
-	power = puissance;
-	engine = moteur;
-	basePrice = prix;
+	name = new char[20];
+	setName(n);
+	setPower(p);
+	setEngine(e);
+	setBasePrice(prix);
 }
-
-Model::Model(Model &source)
+Model::Model(const Model &source)
 {
 	name = new char[20];
 	setName(source.getName());
-	//setName(source.name);
-	power = source.power;
-	engine = source.engine;
-	basePrice = source.basePrice;
+	setPower(source.getPower());
+	setEngine(source.getEngine());
+	setBasePrice(source.getBasePrice());
 }
 
 Model::~Model()
 {
-	if (name!=nullptr)
-	{
-		delete[] name;
-	}
+	delete[] name;
 }
 
+// SETTERS / GETTERS
 
-// Autres Fonctions
-// 2)
-
-void Model::setName(const char* modelname) 
+void Model::setName(const char* n) 
 {
-	if (name!=nullptr)
-	{
+	if (name != nullptr)
 		delete[] name;
-	}
-	name = new char[strlen(modelname) + 1];
-	strcpy(name, modelname);
+	name = new char[strlen(n) + 1];
+	strcpy(name, n);
 }
 
 void Model::setPower(int p)
@@ -132,29 +60,29 @@ void Model::setEngine(Engine e)
 	engine = e;
 }
 
-char* Model::getName()
+char* Model::getName() const
 {
 	return name;
 }
 
-int Model::getPower()
+int Model::getPower() const
 {
 	return power;
 }
 
-float Model::getBasePrice()
+float Model::getBasePrice() const
 {
 	return basePrice;
 }
 
-Engine Model::getEngine()
+Engine Model::getEngine() const
 {
 	return engine;
 }
 
+// DISPLAY
 
-
-void Model::display()
+void Model::display() const
 {
 	cout << "Nom : " << name << " Puissance : " << power << " Moteur : ";
 

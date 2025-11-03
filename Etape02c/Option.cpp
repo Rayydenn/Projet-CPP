@@ -4,37 +4,56 @@ using namespace carconfig;
 
 Option::Option()
 {
-	Code = "";
-	Label = "";
-	Prix = 0.0f;
+	setCode("FFFF");
+	setLabel("Default");
+	setPrice(0.0);
 }
 
-Option::Option(const string& c, const string& l, const float p)
+Option::Option(const string c, const string l, const float p)
 {
-	Code = c;
-	Label = l;
-	Prix = p;
+	setCode(c);
+	setLabel(l);
+	setPrice(p);
 }
 
 Option::Option(const Option& source)
 {
-	Code = source.Code;
-	Label = source.Label;
-	Prix = source.Prix;
+	setCode(source.getCode());
+	setLabel(source.getLabel());
+	setPrice(source.getPrice());
 }
 
-string Option::getCode()
+void Option::setCode(const string n)
+{
+	Code = n;
+}
+
+void Option::setLabel(const string l)
+{
+	Label = l;
+}
+
+void Option::setPrice(const float p)
+{
+	Prix = p;
+}
+
+string Option::getCode() const
 {
 	return Code;
 }
 
+string Option::getLabel() const
+{
+	return Label;
+}
 
-float Option::getPrice()
+float Option::getPrice() const
 {
 	return Prix;
 }
 
-void Option::display()
+void Option::display() const
 {
 	cout << "Code: " << Code << endl << "Nom: " << Label << endl << "Prix: " << Prix << endl;
 }

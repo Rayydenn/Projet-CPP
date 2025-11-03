@@ -16,13 +16,18 @@ namespace carconfig
 
 		public:
 			Option();
-			Option(const string&, const string&, const float);
+			Option(const string, const string, const float);
 			Option(const Option &source);
 
-			string getCode();
-			float getPrice();
+			void setCode(const string n);
+			void setLabel(const string l);
+			void setPrice(const float p);
 
-			void display();
+			string getCode() const;
+			string getLabel() const;
+			float getPrice() const;
+
+			void display() const;
 
 	};
 }

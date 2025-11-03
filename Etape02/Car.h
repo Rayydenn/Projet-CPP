@@ -1,33 +1,33 @@
 #ifndef CAR_H
 #define CAR_H
-
 #include <iostream>
-#include "Model.h"
 #include <cstring>
+#include "Model.h"
 
 using namespace std;
 
-class Car
+namespace carconfig
 {
-private:
-	string name;
-	Model model;
+	class Car
+	{
+	private:
+		string Name;
+		Model model;
 
-public:
-	// Test 1 & 2
-	Car();
-	// Test 3
-	Car(const string& nom, Model modele);
-	Car(Car &source);
-	~Car();
-	
-	void setName(const string&);
-	void setModel(Model m);
 
-	string &getName();
-	Model getModel();
+	public:
+		Car();
+		Car(const string name, const Model& m);
+		Car(const Car &source);
+		~Car();
 
-	void display();
-};
+		void display() const;
+		void setName(const string n);
+		void setModel(const Model&);
+		Model getModel() const;
+		string getName() const;
 
+
+	};
+}
 #endif

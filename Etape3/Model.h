@@ -1,43 +1,40 @@
-#ifndef MODEL_H
-#define MODEL_H
+#pragma once
 #include <iostream>
-#include <cstring>
-
 using namespace std;
 
 namespace carconfig
 {
-	enum Engine{Petrol, Diesel, Electric, Hybrid};
+	enum Engine { Petrol, Diesel, Electric, Hybrid };
 
 	class Model
 	{
-		private:
-			string Name;
-			int Power;
-			float basePrice;
-			Engine engine;
+	private:
+		char* name;
+		int power;
+		float basePrice;
+		Engine engine;
 
-		public:
-			Model();
-			Model(const string&, const int, const Engine, const float);
-			Model(const Model &source);
+	public:
+		Model();
+		Model(const char*,const int,const Engine,const float);
+		Model(const Model&);
+		~Model();
 
-			void setName(const string&);
-			void setPower(const int);
-			void setbasePrice(const float);
-			void setEngine(const Engine);
 
-			float getbasePrice() const;
-			string getName() const;
-			int getPower() const;
-			Engine getEngine() const;
+		void display() const;
+		void setName(const char*);
+		void setPower(int);
+		void setEngine(Engine);
+		void setBasePrice(float);
 
-			friend istream& operator>>(istream& is, Model& m);
-        	friend ostream& operator<<(ostream& os, const Model& m);
+	    char* getName() const;
+	    int getPower() const;
+	    float getBasePrice() const;
+	    Engine getEngine() const;
 
-			void display() const;
+
+	    friend istream& operator>>(istream& is, Model& m);
+	    friend ostream& operator<<(ostream& os, const Model& m);
+
 	};
-	
-
 }
-#endif

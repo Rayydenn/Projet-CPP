@@ -1,28 +1,34 @@
-#ifndef MODEL_H
-#define MODEL_H
-
+#pragma once
 #include <iostream>
-#include <cstring>
 using namespace std;
 
-enum Engine {Petrol, Diesel, Electric, Hybrid};
-
-class Car;
+enum Engine { Petrol, Diesel, Electric, Hybrid };
 
 class Model
 {
-	friend class Car;
 private:
-	string name;
+	char* name;
 	int power;
 	float basePrice;
 	Engine engine;
 
 public:
 	Model();
-	Model(const string&, int, Engine, float);
+	Model(const char*,const int,const Engine,const float);
+	Model(const Model&);
+	~Model();
 
-	void display();
+
+	void display() const;
+	void setName(const char*);
+	void setPower(int);
+	void setEngine(Engine);
+	void setBasePrice(float);
+
+    char* getName() const;
+    int getPower() const;
+    float getBasePrice() const;
+    Engine getEngine() const;
+
+
 };
-
-#endif

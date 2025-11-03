@@ -1,65 +1,80 @@
 #include "Model.h"
+#include <cstring>
+#include <iostream>
+using namespace std;
 
 using namespace carconfig;
 
+// Constructeurs
 Model::Model()
 {
-	Name = "";
-	Power = 0;
-	basePrice = 0.0f;
-	engine = Petrol;
+	name = new char[20];
+	setName(name);
+	setPower(0);
+	setEngine(Engine::Petrol);
+	setBasePrice(0.0);
 }
 
-Model::Model(const string& n, const int p, const Engine e, const float bp)
+Model::Model(const char* n, const int p, const Engine e, const float prix)
 {
-	Name = n;
-	Power = p;
-	basePrice = bp;
-	engine = e;
+	name = new char[20];
+	setName(n);
+	setPower(p);
+	setEngine(e);
+	setBasePrice(prix);
 }
-
 Model::Model(const Model &source)
 {
-	Name = source.Name;
-	Power = source.Power;
-	basePrice = source.basePrice;
-	engine = source.engine;
+	name = new char[20];
+	setName(source.getName());
+	setPower(source.getPower());
+	setEngine(source.getEngine());
+	setBasePrice(source.getBasePrice());
 }
 
-
-void Model::setName(const string& n)
+Model::~Model()
 {
-	Name = n;
+	delete[] name;
 }
 
-void Model::setPower(const int p)
+// SETTERS / GETTERS
+
+void Model::setName(const char* n) 
 {
-	Power = p;
+	if (name != nullptr)
+		delete[] name;
+	name = new char[strlen(n) + 1];
+	strcpy(name, n);
 }
 
-void Model::setbasePrice(const float bp)
+void Model::setPower(int p)
 {
-	basePrice = bp;
+	power = p;
 }
 
-void Model::setEngine(const Engine e)
+void Model::setBasePrice(float prix)
+{
+	basePrice = prix;
+}
+
+void Model::setEngine(Engine e)
 {
 	engine = e;
 }
 
-float Model::getbasePrice() const
+char* Model::getName() const
 {
-	return basePrice;
-}
-
-string Model::getName() const
-{
-	return Name;
+	return name;
 }
 
 int Model::getPower() const
 {
-	return Power;
+	return power;
+}
+
+float Model::getBasePrice() const
+{
+	return basePrice;
 }
 
 Engine Model::getEngine() const
@@ -67,18 +82,19 @@ Engine Model::getEngine() const
 	return engine;
 }
 
+
 namespace carconfig
 {
 	istream& operator>>(istream& is, Model& m)
 	{
-		string nom;
+		char* nom;
 		float prix;
 		int puissance;
 		int choix;
 		Engine moteur;
 
 		cout << "Entrez le nom du Modèle: " << endl;
-		getline(is, nom);
+		is >> nom;
 		cout << "Entrez la puissance du Modèle (chevaux): " << endl;
 		is >> puissance;
 		while (puissance < 0)
@@ -111,18 +127,18 @@ namespace carconfig
 
 
 		m.setName(nom);
-		m.setbasePrice(prix);
+		m.setBasePrice(prix);
 		m.setEngine(moteur);
 		m.setPower(puissance);
 
-	return is;
+		return is;
 	}
 
 	ostream& operator<<(ostream& os, const Model& m)
 	{
 		os << "Nom du modèle : " << m.getName() << endl
 	       << "Puissance : " << m.getPower() << " ch" << endl
-	       << "Prix de base : " << m.getbasePrice() << " €" << endl
+	       << "Prix de base : " << m.getBasePrice() << " €" << endl
 	       << "Moteur : ";
 
 	    switch (m.getEngine())
@@ -136,21 +152,24 @@ namespace carconfig
 
 	    os << endl;	
 
-	return os;
-}
+		return os;
+	}
 }
 
 
+// DISPLAY
 
 void Model::display() const
 {
-	cout << "Nom: " << Name << endl << "Puissance: " << Power << endl << "Prix: " << basePrice << endl << "Moteur: ";
+	cout << "Nom : " << name << " Puissance : " << power << " Moteur : ";
 
 	switch(engine)
 	{
-		case Petrol: cout << "Essence" << endl; break;
-		case Diesel: cout << "Diesel" << endl; break;
-		case Electric: cout << "Electrique" << endl; break;
-		case Hybrid: cout << "Hybride" << endl; break;
+		case Petrol: cout << "Essence"; break;
+		case Diesel: cout << "Diesel"; break;
+		case Electric: cout << "Electrique"; break;
+		case Hybrid: cout << "Hybride"; break;
 	}
+
+	cout << " Prix de Base : " << basePrice << " €" << endl;
 }
