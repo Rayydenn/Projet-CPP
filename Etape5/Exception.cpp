@@ -4,7 +4,7 @@ using namespace carconfig;
 
 Exception::Exception()
 {
-	msg = "Error: ";
+	setmsg("Error404");
 }
 
 Exception::Exception(string m)

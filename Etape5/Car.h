@@ -22,12 +22,13 @@ namespace carconfig
 		Car();
 		Car(const string name, const Model m);
 		Car(const Car &source);
+		~Car();
 
 		void display() const;
 		void addOption(const Option& option);
+		void removeOption(const string);
 		void setName(const string n);
 		void setModel(const Model& m);
-		void removeOption(const string);
 		Model getModel() const;
 		string getName() const;
 		float getPrice() const;

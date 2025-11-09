@@ -7,11 +7,12 @@ using namespace carconfig;
 /*										CONSTRUCTEURS										  */
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 Car::Car()
 {
 	Name = "";
-	model = Model();
-	for (int i = 0; i < 20; i++)
+	setModel(model);
+	for (int i = 0; i < 5; i++)
         option[i] = nullptr;
 }
 
@@ -19,7 +20,7 @@ Car::Car(const string n, const Model m)
 {
 	Name = n;
 	setModel(m);
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5; i++)
 		option[i] = nullptr; 
 }
 
@@ -27,7 +28,7 @@ Car::Car(const Car& source)
 {
 	Name = source.Name;
 	setModel(source.model);
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5; i++)
     {
         if (source.option[i] != nullptr)
             option[i] = new Option(*source.option[i]);
@@ -36,9 +37,20 @@ Car::Car(const Car& source)
     }
 }
 
+Car::~Car()
+{
+	for (int i = 0; i < 5; ++i)
+    {
+        delete option[i];
+        option[i] = nullptr;
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
-/*										OPTIONS												  */
+/*										OPTION												  */
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 void Car::addOption(const Option& opt)
 {
@@ -75,8 +87,9 @@ void Car::removeOption(const string c)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-/*										GETTERS/SETTERS										  */
+/*										SETTERS/GETTERS										  */
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 void Car::setName(const string n)
 {
@@ -87,7 +100,7 @@ void Car::setModel(const Model& m)
 {
 	model.setName(m.getName());
 	model.setPower(m.getPower());
-	model.setbasePrice(m.getbasePrice());
+	model.setBasePrice(m.getBasePrice());
 	model.setEngine(m.getEngine());
 }
 
@@ -104,7 +117,7 @@ string Car::getName() const
 float Car::getPrice() const
 {
 	float total = 0.0f;
-	for (int i = 0; i < 20;i++)
+	for (int i = 0; i < 5;i++)
 	{
 		if (option[i] != nullptr)
 		{
@@ -112,13 +125,14 @@ float Car::getPrice() const
 		}
 	}
 
-	total += model.getbasePrice();
+	total += model.getBasePrice();
 	return total;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /*										OPERATEURS											  */
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 Car& Car::operator=(const Car& other)
 {
@@ -127,13 +141,13 @@ Car& Car::operator=(const Car& other)
 		Name = other.Name;
 		setModel(other.model);
 
-		for (int i = 0; i < 20;i++)
+		for (int i = 0; i < 5;i++)
 		{
 			delete option[i];
 			option[i] = nullptr;
 		}
 
-		for (int i = 0; i < 20;i++)
+		for (int i = 0; i < 5;i++)
 		{
 			if (other.option[i] != nullptr)
 			{
@@ -206,8 +220,8 @@ namespace carconfig
 
 Option* Car::operator[](int index) const
 {
-    if (index < 0 || index >= 20)
-        return nullptr;  // Sécurité pour éviter les débordements
+    if (index < 0 || index >= 5)
+        return nullptr;
     return option[index];
 }
 
@@ -216,7 +230,7 @@ void Car::display() const
 {
 	cout << "Nom du Projet: " << Name << endl;
 	model.display();
-	for (int i = 0; i < 20;i++)
+	for (int i = 0; i < 5;i++)
 	{
 		if(option[i] != nullptr)
 		{

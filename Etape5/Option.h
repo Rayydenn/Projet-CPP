@@ -33,7 +33,7 @@ namespace carconfig
         	Option& operator--();  // Prefixe (--op)
         	Option operator--(int);  // Postfixe (op--)
 
-			void display() const;
+			void display() const; // Je laisse pour simplifier l'operateur >> de Car.cpp
 
 	};
 }

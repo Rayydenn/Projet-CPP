@@ -12,8 +12,8 @@ const string Employee::ADMINISTRATIVE = "Administratif";
 
 Employee::Employee():Actor()
 {
-	Role = "";
-	Login = "";
+	setRole(Role);
+	setLogin(Login);
 	Password = nullptr;
 }
 
