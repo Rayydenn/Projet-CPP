@@ -1,5 +1,5 @@
-Test3v3: Test3.cpp Car.o Option.o Model.o
-		g++ Test3.cpp Car.o Option.o Model.o -o Test3v4
+Test3: Test3.cpp Car.o Option.o Model.o
+		g++ Test3.cpp Car.o Option.o Model.o -o Test3
 
 Car.o: Car.cpp Car.h Model.h Option.h
 		g++ Car.cpp -c

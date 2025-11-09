@@ -1,6 +1,7 @@
 #include "Model.h"
 #include <cstring>
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 using namespace carconfig;
@@ -87,14 +88,16 @@ namespace carconfig
 {
 	istream& operator>>(istream& is, Model& m)
 	{
-		char* nom;
+		char temp[100];
 		float prix;
 		int puissance;
 		int choix;
 		Engine moteur;
 
 		cout << "Entrez le nom du Modèle: " << endl;
-		is >> nom;
+		is >> setw(100) >> temp;
+
+
 		cout << "Entrez la puissance du Modèle (chevaux): " << endl;
 		is >> puissance;
 		while (puissance < 0)
@@ -126,7 +129,7 @@ namespace carconfig
 		}
 
 
-		m.setName(nom);
+		m.setName(temp);
 		m.setBasePrice(prix);
 		m.setEngine(moteur);
 		m.setPower(puissance);

@@ -6,7 +6,7 @@ using namespace carconfig;
 Car::Car()
 {
 	Name = "";
-	model = Model();
+	setModel(model);
 	for (int i = 0; i < 5; i++)
         option[i] = nullptr;
 }
