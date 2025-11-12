@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Client>
+<Actor>
+<Id>
+23
+</Id>
+</Actor>
+<Person>
+<Nom>
+Wagner
+</Nom>
+<Prenom>
+Jean-Marc
+</Prenom>
+</Person>
+<Gsm>
+0499.65.89.76
+</Gsm>
+</Client>
+
