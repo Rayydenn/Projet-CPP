@@ -54,7 +54,7 @@ Car::~Car()
 
 void Car::addOption(const Option& opt)
 {
-	for (int i = 0; i < 20;i++)
+	for (int i = 0; i < 5;i++)
 	{
 		if (option[i] != nullptr)
 		{
@@ -73,7 +73,7 @@ void Car::addOption(const Option& opt)
 
 void Car::removeOption(const string c)
 {
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (option[i] != nullptr && option[i]->getCode() == c)
 		{
@@ -83,7 +83,7 @@ void Car::removeOption(const string c)
             return;
 		}
 	}
-	throw OptionException("Code non trouvé");
+	throw OptionException("L'option n'existe pas");
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -181,17 +181,6 @@ Car Car::operator-(const string c) const
 	return temp;
 }
 
-namespace carconfig {
-
-	Car operator+(const Option& opt, const Car& c)
-	{
-		Car temp(c);
-		temp.addOption(opt);
-		return temp;
-	}
-
-}
-
 bool Car::operator>(const Car& other) const
 {
 	return this->getPrice() > other.getPrice();
@@ -214,6 +203,13 @@ namespace carconfig
 		other.display();
 
 		return os;
+	}
+
+	Car operator+(const Option& opt, const Car& c)
+	{
+		Car temp(c);
+		temp.addOption(opt);
+		return temp;
 	}
 }
 

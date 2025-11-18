@@ -6,14 +6,14 @@
 
 Person::Person()
 {
-	lastName = "";
-	firstName = "";
+	setLastName("Inconnu");
+	setFirstName("Inconnu");
 }
 
 Person::Person(string lN, string fN)
 {
-	lastName = lN;
-	firstName = fN;
+	setLastName(lN);
+	setFirstName(fN);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,8 +76,8 @@ Person& Person::operator=(const Person& p)
 {
 	if (this != &p)
 	{
-		lastName = p.lastName;
-		firstName = p.firstName;
+		setLastName(p.lastName);
+		setFirstName(p.firstName);
 	}
 
 	return *this;

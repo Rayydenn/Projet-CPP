@@ -10,9 +10,9 @@ using namespace carconfig;
 
 Option::Option()
 {
-	Code = "";
-	Label = "";
-	Prix = 0.0f;
+	setCode("0000");
+	setLabel("Inconnu");
+	setPrice(0.0f);
 }
 
 Option::Option(const string& c, const string& l, const float p)
@@ -50,8 +50,8 @@ string Option::getLabel() const
 
 void Option::setCode(const string c)
 {
-	if (c.empty())
-		throw OptionException("Code d'option vide");
+	if (c.length() != 4)
+		throw OptionException("Le Code doit être composé de 4 caractères!");
 	Code = c;
 }
 
@@ -83,7 +83,7 @@ namespace carconfig
 
 		cout << "Entrez le code (4 chars): " << endl;
 		is >> code;
-		if (code.size() != 4)
+		if (code.length() != 4)
 			throw OptionException("Code doit être composé de 4 caractères!");
 
 		is.ignore();

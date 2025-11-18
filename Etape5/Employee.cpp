@@ -1,5 +1,6 @@
 #include "Employee.h"
 #include "PasswordException.h"
+#include <cctype>
 
 using namespace carconfig;
 
@@ -41,7 +42,11 @@ Employee::Employee(Employee& source):Actor(source)
 
 Employee::~Employee()
 {
-	delete Password;
+	if (Password != nullptr)
+	{
+   		delete Password;
+   		Password = nullptr;
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,18 +62,33 @@ void Employee::setLogin(const string login)
 void Employee::setPassword(const string &pw)
 {
 	if (pw.empty())
-		throw PasswordException("Attention! Sans mot de passe vous risquez de tout perdre !");
+		throw PasswordException("Pas de mot de passe", 4);
 
-	if (pw.find(' ') != string::npos)
-   		throw PasswordException("Le Mot de passe ne doit pas contenir d'espace !");
+   	if (pw.length() < 6)
+   		throw PasswordException("Le Mot de passe doit être composé d'au moins 6 caractères", 1);
 
-	if (pw.length() > 64)
-		throw PasswordException("Le Mot de passe doit être de maximum 64 caractères (et de minimum 8 caractères) !");
+   	bool alpha = false;
+   	bool digit = false;
 
-   	if (pw.length() < 8)
-   		throw PasswordException("Le Mot de passe doit être composé d'au moins 8 caractères (et de maximum 64 caractères) !");
+   	for (char c : pw)
+   	{
+   		if (isalpha(static_cast<unsigned char>(c)))
+   			alpha = true;
+   		else if (isdigit(static_cast<unsigned char>(c)))
+   			digit = true;
+   	}
 
-   	delete Password;
+   	if (!alpha)
+   		throw PasswordException("Le Mot de passe doit contenir au moins 1 lettre !", 2);
+
+   	if (!digit)
+   		throw PasswordException("Le Mot de passe doit contenir au moins 1 chiffre !", 3);
+
+   	if (Password != nullptr)
+	{
+   		delete Password;
+   		Password = nullptr;
+	}
    	Password = new string(pw);
 }
 
@@ -84,7 +104,7 @@ void Employee::setRole(const string role)
 string Employee::getPassword() const
 {
 	if (Password == nullptr)
-		throw PasswordException("");
+		throw PasswordException("Pas de mot de passe", 4);
 	return Password ? *Password : "";
 }
 
@@ -113,7 +133,11 @@ string Employee::tuple() const {
 }
 
 void Employee::resetPassword() {
-    delete Password;
+    if (Password != nullptr)
+	{
+   		delete Password;
+   		Password = nullptr;
+	}
     Password = nullptr;
 }
 
@@ -133,7 +157,12 @@ namespace carconfig
 	    setLogin(source.Login);
 	    setRole(source.Role);
 
-	    delete Password;
+	    if (Password != nullptr)
+		{
+	   		delete Password;
+	   		Password = nullptr;
+		}
+
 	    if (source.Password)
 	        setPassword(*source.Password);
 	    else

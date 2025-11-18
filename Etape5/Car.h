@@ -43,9 +43,9 @@ namespace carconfig
         Option* operator[](int index) const;
 
         friend ostream& operator<<(ostream& os, const Car& other);
+		friend Car operator+(const Option& opt, const Car& c);
 
 	};
-	Car operator+(const Option& opt, const Car& c);
 }
 
 

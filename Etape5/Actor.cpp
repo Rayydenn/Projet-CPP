@@ -6,12 +6,12 @@
 
 Actor::Actor():Person()
 {
-	Id = -1;
+	setId(-1);
 }
 
 Actor::Actor(int id, string nom, string prenom):Person(nom,prenom)
 {
-	Id = id;
+	setId(id);
 }
 
 Actor::~Actor()
@@ -40,15 +40,3 @@ int Actor::getId() const
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /*									TUPLE/STRING									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-string Actor::toString() const
-{
-	return "Id: " + to_string(Id)
-		 + ", Nom: " + lastName
-		 + ", Prenom: " + firstName;
-}
-
-string Actor::tuple() const
-{
-	return to_string(Id) + ", " + lastName + ", " + firstName;
-}

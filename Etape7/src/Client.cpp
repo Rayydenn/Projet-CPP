@@ -1,27 +1,24 @@
 #include "Client.h"
 
+using namespace carconfig;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /*									CONSTRUCTEURS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Client::Client():Actor()
 {
-	setGsm("04");
+	Gsm = "";
 }
 
 Client::Client(string nom, string prenom, int id, string tel):Actor(id,nom,prenom)
 {
-	setGsm(tel);
+	Gsm = tel;
 }
 
 Client::Client(const Client& source):Actor(source)
 {
-	setGsm(source.Gsm);
-}
-
-Client::~Client()
-{
-	cout << "Destruction Client: " << getGsm() << endl;
+	Gsm = source.Gsm;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +44,7 @@ string Client::getGsm() const
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 string Client::toString() const {
-    return "[C" + std::to_string(Id) + "] " + lastName + " " + firstName;
+    return "[C" + std::to_string(Id) + "] " + lastName + " " + firstName + " " + Gsm;
 }
 
 string Client::tuple() const {
@@ -55,11 +52,38 @@ string Client::tuple() const {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/*									OPERATEUR									*/
+/*									OPERATEURS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ostream& operator<<(ostream& os, const Client c)
+namespace carconfig
 {
-	os << c.toString();
-	return os;
+	ostream& operator<<(ostream& os, const Client& c)
+	{
+		os << "<Client>" << endl;
+		os << static_cast<const Actor&>(c);
+		os << static_cast<const Person&>(c);
+		os << "<Gsm>" << endl;
+		os << c.getGsm() << endl;
+		os << "</Gsm>" << endl;
+		os << "</Client>" << endl;
+
+		return os;
+	}
+
+	istream& operator>>(istream& is, Client& c)
+	{
+		string line;
+
+
+		getline(is, line);
+		is >> static_cast<Actor&>(c);
+		is >> static_cast<Person&>(c);
+		getline(is, line);
+		getline(is, line);
+		c.setGsm(line);
+		getline(is, line);
+		getline(is, line);
+
+		return is;
+	}
 }

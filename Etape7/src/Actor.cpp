@@ -1,22 +1,24 @@
 #include "Actor.h"
 
+using namespace carconfig;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /*									CONSTRUCTEURS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Actor::Actor():Person()
 {
-	setId(1);
+	Id = -1;
 }
 
 Actor::Actor(int id, string nom, string prenom):Person(nom,prenom)
 {
-	setId(id);
+	Id = id;
 }
 
 Actor::~Actor()
 {
-	cout << "Destruction Actor: " << getId() << endl;
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,4 +43,45 @@ int Actor::getId() const
 /*									TUPLE/STRING									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// C'est virtual donc pas besoin, on les appelera dans Client.cpp ou Employee.cpp
+string Actor::toString() const
+{
+	return "Id: " + to_string(Id)
+		 + ", Nom: " + lastName
+		 + ", Prenom: " + firstName;
+}
+
+string Actor::tuple() const
+{
+	return to_string(Id) + ", " + lastName + ", " + firstName;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*									 OPERATEURS				  									*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace carconfig
+{
+	ostream& operator<<(ostream& os, const Actor& a)
+	{
+		os << "<Actor>" << endl;
+		os << "<Id>" << endl;
+		os << a.getId() << endl;
+		os << "</Id>" << endl;
+		os << "</Actor>" << endl;
+
+		return os;
+	}
+
+	istream& operator>>(istream& is, Actor& a)
+	{
+		string line;
+		getline(is, line);
+		getline(is, line);
+		getline(is, line);
+		a.setId(stoi(line));
+		getline(is, line);
+		getline(is, line);
+
+		return is;
+	}
+}

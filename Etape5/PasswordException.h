@@ -9,8 +9,12 @@ namespace carconfig
 {
 	class PasswordException: public Exception
 	{
+	private:
+		int code;
 	public:
 		PasswordException();
-		PasswordException(string);
+		PasswordException(string, int);
+
+		void ErrorType(int);
 	};	
 }

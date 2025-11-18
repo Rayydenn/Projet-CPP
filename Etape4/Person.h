@@ -14,6 +14,7 @@ protected:
 public:
 	Person();
 	Person(string, string);
+	~Person();
 
 	void setLastName(string);
 	void setFirstName(string);

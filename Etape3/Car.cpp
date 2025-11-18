@@ -117,8 +117,11 @@ Car& Car::operator=(const Car& other)
 
 		for (int i = 0; i < 5;i++)
 		{
-			delete option[i];
-			option[i] = nullptr;
+			if (option[i] != nullptr)
+			{
+					delete option[i];
+					option[i] = nullptr;
+			}
 		}
 
 		for (int i = 0; i < 5;i++)
@@ -155,17 +158,6 @@ Car Car::operator-(const string c) const
 	return temp;
 }
 
-namespace carconfig {
-
-	Car operator+(const Option& opt, const Car& c)
-	{
-		Car temp(c);
-		temp.addOption(opt);
-		return temp;
-	}
-
-}
-
 bool Car::operator>(const Car& other) const
 {
 	return this->getPrice() > other.getPrice();
@@ -189,7 +181,15 @@ namespace carconfig
 
 		return os;
 	}
+
+	Car operator+(const Option& opt, const Car& c)
+	{
+		Car temp(c);
+		temp.addOption(opt);
+		return temp;
+	}
 }
+
 
 
 Option* Car::operator[](int index) const

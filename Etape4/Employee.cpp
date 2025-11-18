@@ -39,6 +39,7 @@ Employee::Employee(Employee& source):Actor(source)
 Employee::~Employee()
 {
 	delete Password;
+	cout << "Destruction Employé: " << getRole() << " " << getLogin() << endl;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,7 +54,11 @@ void Employee::setLogin(const string login)
 
 void Employee::setPassword(const string &pw)
 {
-   	delete Password;
+	if (Password != nullptr)  // 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	{
+   		delete Password;
+   		Password = nullptr;
+	}
    	Password = new string(pw);
 }
 
@@ -96,8 +101,11 @@ string Employee::tuple() const {
 }
 
 void Employee::resetPassword() {
-    delete Password;
-    Password = nullptr;
+	if (Password != nullptr)
+	{
+	    delete Password;
+	    Password = nullptr;
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,7 +114,7 @@ void Employee::resetPassword() {
 
 Employee& Employee::operator=(const Employee& source)
 {
-    if (this == &source) return *this; // auto-affectation
+    if (this == &source) return *this;
 
     firstName = source.firstName;
     lastName = source.lastName;
@@ -114,7 +122,11 @@ Employee& Employee::operator=(const Employee& source)
     Login = source.Login;
     Role = source.Role;
 
-    delete Password;
+    if (Password != nullptr)
+	{
+   		delete Password;
+   		Password = nullptr;
+	}
     if (source.Password)
         Password = new string(*source.Password);
     else

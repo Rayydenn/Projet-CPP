@@ -1,25 +1,21 @@
 #include "Person.h"
 
+using namespace carconfig;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /*									CONSTRUCTEURS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Person::Person()
 {
-	setLastName("Pas de Nom");
-	setFirstName("Pas de Prenom");
+	lastName = "";
+	firstName = "";
 }
 
 Person::Person(string lN, string fN)
 {
-	setLastName(lN);
-	setFirstName(fN);
-}
-
-Person::~Person()
-{
-	cout << "Destruction Personne: " << getLastName() << " " << getFirstName() << endl;
-	cout << endl;
+	lastName = lN;
+	firstName = fN;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,12 +66,38 @@ istream& operator>>(istream& is, Person& p)
 	return is;
 }
 
-ostream& operator<<(ostream& os, const Person& p)
+namespace carconfig
 {
-	os << "Nom: " << p.getLastName() << endl
-	   << "Prenom: " << p.getFirstName() << endl;
+	ostream& operator<<(ostream& os, const Person& p)
+	{
+		os << "<Person>" << endl;
+		os << "<Nom>" << endl;
+		os << p.getLastName() << endl;
+		os << "</Nom>" << endl;
+		os << "<Prenom>" << endl;
+		os << p.getFirstName() << endl;
+		os << "</Prenom>" << endl;
+		os << "</Person>" << endl;
 
-	return os;
+		return os;
+	}
+
+	istream& operator>>(istream& is, Person& p)
+	{
+		string line;
+		getline(is, line);
+		getline(is, line);
+		getline(is, line);
+		p.setLastName(line);
+		getline(is, line);
+		getline(is, line);
+		getline(is, line);
+		p.setFirstName(line);
+		getline(is, line);
+		getline(is, line);
+
+		return is;
+	}
 }
 
 Person& Person::operator=(const Person& p)

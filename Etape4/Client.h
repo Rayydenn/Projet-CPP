@@ -15,6 +15,7 @@ public:
 	Client();
 	Client(string, string, int, string);
 	Client(const Client& source);
+	~Client();
 
 	void setGsm(string tel);
 
