@@ -1,7 +1,5 @@
 #include "PasswordException.h"
 
-using namespace carconfig;
-
 PasswordException::PasswordException():Exception()
 {
 

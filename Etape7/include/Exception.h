@@ -1,20 +1,17 @@
 #pragma once
-#include <string>
 #include <iostream>
-
+#include <string>
+#include <cctype>
 using namespace std;
 
-namespace carconfig
+class Exception
 {
-	class Exception
-	{
-	protected:
-		string msg;
-	public:
-		Exception();
-		Exception(string m);
-		
-		void setmsg(string m);
-		string getMessage() const;
-	};
-}
+protected:
+	string message;
+
+public:
+	Exception();
+	Exception(string);
+	void setMsg(string);
+	string getMessage() const;
+};

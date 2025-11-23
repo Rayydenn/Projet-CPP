@@ -118,6 +118,8 @@ void Essai2()
     bool end = false;
     while (!end) {
       try {
+        int s;
+        cin >> s;
         int val = fsr->read();
         cout << "Lu : " << val << endl;
       } catch(const XmlFileSerializerException& e) {
@@ -170,6 +172,8 @@ void Essai3()
     while (!end) {
       try {
         Client val = fsr->read();
+        int sd;
+        cin >> sd;
         cout << "Lu : " << val.toString() << endl;
       } catch(const XmlFileSerializerException& e) {
         if (e.getCode() == XmlFileSerializerException::END_OF_FILE) { 

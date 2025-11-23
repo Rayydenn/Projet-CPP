@@ -1,6 +1,6 @@
 #include "OptionException.h"
 
-using namespace carconfig;
+
 
 OptionException::OptionException():Exception()
 {

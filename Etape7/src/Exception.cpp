@@ -1,23 +1,18 @@
 #include "Exception.h"
 
-using namespace carconfig;
-
 Exception::Exception()
 {
-	setmsg("Error404");
+	message = "Erreur: ";
 }
-
-Exception::Exception(string m)
+Exception::Exception(string s)
 {
-	setmsg(m);
+	setMsg(s);
 }
-
-void Exception::setmsg(string m)
+void Exception::setMsg(string s)
 {
-	msg = m;
+	message = s;
 }
-
 string Exception::getMessage() const
 {
-	return msg;
+	return message;
 }

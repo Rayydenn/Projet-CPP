@@ -1,15 +1,20 @@
 #pragma once
-#include "Exception.h"
 #include <iostream>
-
-class XmlFileSerializeException:Exception()
+#include <string>
+#include "Exception.h"
+class XmlFileSerializerException: public Exception
 {
+public:
+	static const int NOT_ALLOWED;
+	static const int FILE_NOT_FOUND;
+	static const int END_OF_FILE;
+
 private:
 	int code;
-	string msg;
+	
 public:
-	XmlFileSerializeException();
-	XmlFileSerializeException(string m);
-
-	int getCode();
-}
+	XmlFileSerializerException();
+	XmlFileSerializerException(int c, string);
+	void setCode(int);
+	int getCode() const;
+};

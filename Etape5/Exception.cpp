@@ -7,12 +7,12 @@ Exception::Exception()
 	setmsg("Error404");
 }
 
-Exception::Exception(string m)
+Exception::Exception(const string& m)
 {
 	setmsg(m);
 }
 
-void Exception::setmsg(string m)
+void Exception::setmsg(const string& m)
 {
 	msg = m;
 }

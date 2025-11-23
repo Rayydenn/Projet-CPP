@@ -12,9 +12,9 @@ namespace carconfig
 		string msg;
 	public:
 		Exception();
-		Exception(string m);
+		Exception(const string& m);
 		
-		void setmsg(string m);
+		void setmsg(const string& m);
 		string getmsg() const;
 	};
 }
