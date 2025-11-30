@@ -6,6 +6,7 @@
 #include "Client.h"
 #include "Model.h"
 #include "Option.h"
+#include "Car.h"
 #include <set>
 #include <list>
 
@@ -16,9 +17,17 @@ class Garage
     set<Client>   clients; 
     list<Model>   models; 	  // models.push_back()
     list<Option>  options; 
+    Garage() = default; 
+    static Garage instance;
+    static Car currentProject;
+    Garage operator=(const Garage& g) = delete;
+    Garage(const Garage& g) = delete;
  
   public: 
-    Garage() = default; 
+    static Garage &getInstance();
+    static Car &getCurrentProject();
+    static void resetCurrentProject();
+
     ~Garage() = default; 
  
     void   addModel(const Model & m); 
@@ -42,4 +51,5 @@ class Garage
     void     deleteEmployeeById(int id); 
     Employee findEmployeeByIndex(int index) const; 
     Employee findEmployeeById(int id) const; 
+
 }; 

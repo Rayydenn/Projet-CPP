@@ -1,88 +1,95 @@
-#include "Actor.h"
+#include "Person.h"
 
-int Actor::currentId = 1;
+using namespace std;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /*									CONSTRUCTEURS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Actor::Actor():Person()
+Person::Person()
 {
+	lastName = "";
+	firstName = "";
 }
 
-Actor::Actor(int id, string nom, string prenom):Person(nom,prenom)
+Person::Person(string lN, string fN)
 {
-	Id = id;
-}
-
-Actor::Actor(string n, string p):Person(n,p)
-{
-	
-}
-
-Actor::~Actor()
-{
-
+	lastName = lN;
+	firstName = fN;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /*									SETTERS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Actor::setId(int id)
+void Person::setLastName(string lN) 
 {
-	Id = id;
+	lastName = lN;
+}
+
+void Person::setFirstName(string fN) 
+{
+	firstName = fN;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /*									GETTERS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int Actor::getId() const
+string Person::getLastName() const
 {
-	return this->Id;
+	return lastName;
+}
+
+string Person::getFirstName() const
+{
+	return firstName;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-/*									TUPLE/STRING									*/
+/*									OPERATEURS									*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-string Actor::toString() const
+ostream& operator<<(ostream& os, const Person& p)
 {
-	return "Id: " + to_string(Id)
-		 + ", Nom: " + lastName
-		 + ", Prenom: " + firstName;
-}
-
-string Actor::tuple() const
-{
-	return to_string(Id) + ", " + lastName + ", " + firstName;
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/*									 OPERATEURS				  									*/
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-ostream& operator<<(ostream& os, const Actor& a)
-{
-	os << "<Actor>" << endl;
-	os << "<Id>" << endl;
-	os << a.getId() << endl;
-	os << "</Id>" << endl;
-	os << "</Actor>" << endl;
+	os << "<Person>" << endl;
+	os << "<Nom>" << endl;
+	os << p.getLastName() << endl;
+	os << "</Nom>" << endl;
+	os << "<Prenom>" << endl;
+	os << p.getFirstName() << endl;
+	os << "</Prenom>" << endl;
+	os << "</Person>" << endl;
 
 	return os;
 }
 
-istream& operator>>(istream& is, Actor& a)
+istream& operator>>(istream& is, Person& p)
 {
 	string line;
 	getline(is, line);
 	getline(is, line);
 	getline(is, line);
-	a.setId(stoi(line));
+	p.setLastName(line);
+	getline(is, line);
+	getline(is, line);
+	getline(is, line);
+	p.setFirstName(line);
 	getline(is, line);
 	getline(is, line);
 
 	return is;
+}
+
+
+Person& Person::operator=(const Person& p)
+{
+	if (this != &p)
+	{
+		lastName = p.lastName;
+		firstName = p.firstName;
+	}
+
+	return *this;
 }

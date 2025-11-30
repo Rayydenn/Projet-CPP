@@ -84,7 +84,7 @@ void Model::setEngine(int val)
 
 char* Model::getName() const
 {
-	return name;
+	return name ? name : nullptr;
 }
 
 int Model::getPower() const
