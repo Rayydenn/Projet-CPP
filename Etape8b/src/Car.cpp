@@ -8,7 +8,7 @@
 Car::Car()
 {
 	Name = "";
-	setModel(model);
+	//setModel(model);
 	for (int i = 0; i < 5; i++)
         option[i] = nullptr;
 }

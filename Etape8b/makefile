@@ -32,7 +32,7 @@ $(OBJ)/OptionException.o: $(SRC)/OptionException.cpp $(INC)/OptionException.h $(
 $(OBJ)/Exception.o: $(SRC)/Exception.cpp $(INC)/Exception.h
 	$(COMP) -c $(SRC)/Exception.cpp -o $(OBJ)/Exception.o
 
-$(OBJ)/Car.o: $(SRC)/Car.cpp $(INC)/Car.h $(INC)/Model.h $(INC)/OptionException.h $(INC)/Option.h
+$(OBJ)/Car.o: $(SRC)/Car.cpp $(INC)/Car.h $(INC)/Model.h $(INC)/OptionException.h $(INC)/Option.h $(OBJ)/Model.o $(OBJ)/OptionException.o 
 	$(COMP) -c $(SRC)/Car.cpp -o $(OBJ)/Car.o
 
 $(OBJ)/Model.o: $(SRC)/Model.cpp $(INC)/Model.h

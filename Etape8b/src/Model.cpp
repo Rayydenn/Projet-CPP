@@ -8,7 +8,8 @@ using namespace std;
 Model::Model()
 {
 	name = new char[20];
-	setName(name);
+	strcpy(name,"sans nom");
+	//setName(name);
 	setPower(0);
 	setEngine(Engine::Petrol);
 	setBasePrice(0.0);
@@ -185,7 +186,14 @@ void Model::display() const
 }
 
 string Model::toString() const {
-    return string(name) + ", " +
+	if (name != nullptr)
+	{
+		return string(name) + ", " +
+           std::to_string(power) + ", " +
+           std::to_string(engine) + ", " +
+           std::to_string(basePrice) + "€";
+	}
+    return "Pas de nom, " +
            std::to_string(power) + ", " +
            std::to_string(engine) + ", " +
            std::to_string(basePrice) + "€";
