@@ -1,0 +1,13 @@
+#pragma once
+#include <string>
+#include <iostream>
+#include "Exception.h"
+
+using namespace std;
+
+class OptionException: public Exception
+{
+public:
+	OptionException();
+	OptionException(const string&);
+};	

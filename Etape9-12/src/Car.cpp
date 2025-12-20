@@ -1,5 +1,7 @@
 #include "Car.h"
-
+#include "OptionException.h"
+#include "XmlFileSerializer.hpp"
+#include "XmlFileSerializerException.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /*										CONSTRUCTEURS										  */
@@ -9,7 +11,7 @@
 Car::Car()
 {
 	Name = "";
-	setModel(model);
+	//setModel(model);
 	for (int i = 0; i < 5; i++)
         option[i] = nullptr;
 }
@@ -49,7 +51,6 @@ Car::~Car()
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 void Car::addOption(const Option& opt)
 {
 	for (int i = 0; i < 5;i++)
@@ -57,7 +58,7 @@ void Car::addOption(const Option& opt)
 		if (option[i] != nullptr)
 		{
 			if (option[i]->getCode() == opt.getCode())
-				cerr << "L'option existe deja" << endl;
+				throw OptionException("L'option existe deja");
 		}
 		else
 		{
@@ -66,7 +67,7 @@ void Car::addOption(const Option& opt)
 		}
 	}
 
-	cerr << "La liste est pleine" << endl;
+	throw OptionException("La liste est pleine");
 }
 
 void Car::removeOption(const string c)
@@ -81,7 +82,7 @@ void Car::removeOption(const string c)
             return;
 		}
 	}
-	cerr << "Code non trouvé" << endl;
+	throw OptionException("Code non trouvé");
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,6 +101,14 @@ void Car::setModel(const Model& m)
 	model.setPower(m.getPower());
 	model.setBasePrice(m.getBasePrice());
 	model.setEngine(m.getEngine());
+
+	string image = m.getImage();
+
+	if (!image.empty())
+	{
+		model.setImage(m.getImage());
+	}	
+
 }
 
 Model Car::getModel() const
@@ -222,17 +231,22 @@ ostream& operator<<(ostream& os, const Car& other)
 	os << "</Car>" << endl;
 	return os;
 }
-
 istream& operator>>(istream& is, Car& other)
 {
 	string line;
 	getline(is, line);
+	cout << line << endl;
 	getline(is, line);
+	cout << line << endl;
 	getline(is, line);
+	cout << "1" << line << endl;
 	other.setName(line);
 	getline(is, line);
+	cout << line << endl;
 	is >> other.model;
+	cout << other.model << endl;
 	getline(is, line);
+	cout << line << endl;
 	int i = 0;
 	while (i < 5)
 	{
@@ -277,4 +291,41 @@ void Car::display() const
 			option[i]->display();
 		}
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////
+// 								SAVE et LOAD							 //
+///////////////////////////////////////////////////////////////////////////
+
+void Car::save()
+{
+	fstream fd;
+	string fn = Name + ".xml";
+	fd.open(fn, ios::out);
+	if (!fd.is_open())
+	{
+		cout << "Fichier introuvable";
+		return;
+	}
+	fd << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+	fd << *this;
+	fd.close();
+}
+
+void Car::load(string projectName)
+{
+	fstream fd;
+	string fn = projectName + ".xml";
+	fd.open(fn, ios::in);
+	if(!fd.is_open())
+	{
+		cout << "Fichier introuvable";
+		return;
+	}
+	cout << "Ouverture reussi" << endl;
+	string line;
+	getline(fd, line);
+	fd >> *this;
+	fd.close();
+
 }
