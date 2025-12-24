@@ -1,6 +1,18 @@
 #include "Garage.h"
 Garage Garage::instance;
 Car Garage::currentProject;
+int Garage::idLoggedEmployee = -1;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////      CONSTRUCTEUR      ///////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+Garage::Garage()
+{
+    // employé admin par défaut : administratif (role 0)
+    addEmployee("Admin", "Admin", "admin", 0);
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////       MODEL       ///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,15 +130,17 @@ void   Garage::deleteClientById(int id)
 Client Garage::findClientByIndex(int index) const
 {
 	if (index < 0 || index >= clients.size())
-    {
-        cout << "Index hors limite" << endl;
-        return Client();
-    }
+	{
+	    cout << "Index hors limite" << endl;
+	    return Client();
+	}
 
 	auto it = clients.cbegin();
 	advance(it, index);
 	if (it != clients.cend())
 		return *it;
+	else
+		cout << "Index hors limite" << endl;
 
 	return Client();
 }
@@ -134,10 +148,11 @@ Client Garage::findClientByIndex(int index) const
 Client Garage::findClientById(int id) const
 {
 	if (id < 0)
-    {
-        cout << "Index hors limite" << endl;
-        return Client();
-    }
+	{
+	    cout << "Index hors limite" << endl;
+	    return Client();
+	}
+
 	auto it = clients.cbegin();
 	while (it != clients.cend() && it->getId() != id)
 	{
@@ -146,6 +161,8 @@ Client Garage::findClientById(int id) const
 
 	if (it != clients.cend())
 		return *it;
+	else
+		cout << "Id hors limite" << endl;
 
 	return Client();
 }
@@ -154,11 +171,21 @@ Client Garage::findClientById(int id) const
 ////////////////////////////////////       EMPLOYEE       ///////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int Garage::addEmployee(string lastName,string firstName,string login, string role)
+int Garage::addEmployee(string lastName,string firstName,string login, string role, int id, string* Password)
 {
-	employees.insert(Employee(lastName, firstName, Actor::currentId ,login, role));
+	int finalId;
+	if (id == 0)
+		finalId = ++Actor::currentId;
+	else
+		finalId = id;
+
+	Employee e(lastName, firstName, finalId, login, role);
+
+	if (Password != nullptr)
+		e.setPassword(*Password);
+
+	employees.insert(e);
 	cout << "Employee Id: " << Actor::currentId << endl;
-	Actor::currentId++;
 	return 1;
 }
 
@@ -169,6 +196,18 @@ int Garage::addEmployee(string lastName, string firstName, string login, int rol
 	e.setRole(role);
 	string rolestr = e.getRole();
 	return addEmployee(lastName, firstName, login, rolestr);
+}
+
+int Garage::updateEmployee(const Employee& e, int id)
+{
+    auto it = employees.cbegin();
+	while (it != employees.cend() && it->getId() != id)
+	{
+		it++;
+	}
+	employees.insert(e);
+	cout << "Id Employee: " << id << endl;
+	return 1;
 }
 
 void Garage::displayEmployees() const
@@ -341,4 +380,14 @@ void Garage::importOptionsFromCsv(string filename)
 		addOption(o);
 
 	}
+}
+
+void Garage::setId(int i)
+{
+	Garage::idLoggedEmployee = i;
+}
+
+int Garage::getId() const
+{
+	return Garage::idLoggedEmployee;
 }

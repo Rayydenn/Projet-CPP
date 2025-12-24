@@ -19,6 +19,7 @@
 #include "Actor.h"
 
 #include "OptionException.h"
+#include "PasswordException.h"
 // ********************** //
 
 using namespace std;
@@ -105,6 +106,16 @@ ApplicGarageWindow::ApplicGarageWindow(QWidget *parent) : QMainWindow(parent),ui
         addAvailableModel(m.getName(), m.getBasePrice());
     } while(true);
 
+
+
+    // Employé Admin
+
+    for (int i = 0; ; i++)
+    {
+        Employee e = Garage::getInstance().findEmployeeByIndex(i);
+        if (e.getId() == 0) break;
+        addTupleTableEmployees(e.tuple());
+    }
 
     // Importation des options (étape 10)
 
@@ -846,6 +857,19 @@ void ApplicGarageWindow::on_actionAddEmployee_triggered()
 
     Garage::getInstance().addEmployee(lastName, firstName, login, type);
 
+    // mise à jour de la table des employés
+    clearTableEmployees();
+
+    int i = 0;
+    for (i ; ; i++)
+    {
+        Employee e = Garage::getInstance().findEmployeeByIndex(i);
+        if (e.getId() == 0) break;
+
+        addTupleTableEmployees(e.tuple());
+    }
+
+
     cout << ">>> Clic sur item AddEmployee <<<" << endl;
     cout << "lastName = " << lastName << endl;
     cout << "firstName = " << firstName << endl;
@@ -858,6 +882,21 @@ void ApplicGarageWindow::on_actionDeleteEmployeeById_triggered()
 {
     // TO DO (étape 11)
     cout << ">>> Clic sur item DeleteEmployeeById <<<" << endl;
+
+    int id = dialogPromptInt("Supprimer employé", "Id de l'employé à supprimer :");
+
+    Garage::getInstance().deleteEmployeeById(id);
+
+    clearTableEmployees();
+
+    int i = 0;
+    for (i ; ; i++)
+    {
+        Employee e = Garage::getInstance().findEmployeeByIndex(i);
+        if (e.getId() == 0) break;
+
+        addTupleTableEmployees(e.tuple());
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -865,12 +904,34 @@ void ApplicGarageWindow::on_actionDeleteEmployeeByIndex_triggered()
 {
     // TO DO (étape 11)
     cout << ">>> Clic sur item DeleteEmployeeByIndex <<<" << endl;
+
+    int ind = getIndexEmployeeSelectionTable();
+    if (ind == -1)
+    {
+        dialogError("Supprimer employé",
+                    "Vous devez sélectionner un employé dans la table !");
+        return;
+    }
+    
+    Garage::getInstance().deleteEmployeeByIndex(ind);
+
+    clearTableEmployees();
+
+    int i = 0;
+    for (i ; ; i++)
+    {
+        Employee e = Garage::getInstance().findEmployeeByIndex(i);
+        if (e.getId() == 0) break;
+        addTupleTableEmployees(e.tuple());
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void ApplicGarageWindow::on_actionAddClient_triggered()
 {
     // TO DO (étape 11)
+    cout << ">>> Clic sur item AddClient <<<" << endl;
+
     string lastName = this->dialogPromptText("Nouvel Client","Nom :");
     if (lastName.empty())
     {
@@ -914,14 +975,14 @@ void ApplicGarageWindow::on_actionAddClient_triggered()
 
         addTupleTableClients(cl.tuple());
     }
-
-    cout << ">>> Clic sur item AddClient <<<" << endl;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void ApplicGarageWindow::on_actionDeleteClientById_triggered()
 {
     // TO DO (étape 11)
+    cout << ">>> Clic sur item DeleteClientById <<<" << endl;
+
     int id = this->dialogPromptInt("Suppression par ID", "ID : ");
     if (id < 0)
     {
@@ -929,7 +990,7 @@ void ApplicGarageWindow::on_actionDeleteClientById_triggered()
         return;
     }
 
-    
+
     Client c = Garage::getInstance().findClientById(id);
 
     if (c.getId() == 0)
@@ -954,14 +1015,14 @@ void ApplicGarageWindow::on_actionDeleteClientById_triggered()
 
         addTupleTableClients(cl.tuple());
     }
-
-    cout << ">>> Clic sur item DeleteClientById <<<" << endl;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void ApplicGarageWindow::on_actionDeleteClientByIndex_triggered()
 {
     // TO DO (étape 11)
+    cout << ">>> Clic sur item DeleteClientByIndex <<<" << endl;
+
     int indice = getIndexClientSelectionTable();
     if (indice == -1)
     {
@@ -985,8 +1046,6 @@ void ApplicGarageWindow::on_actionDeleteClientByIndex_triggered()
 
         addTupleTableClients(cl.tuple());
     }
-
-    cout << ">>> Clic sur item DeleteClientByIndex <<<" << endl;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -994,6 +1053,81 @@ void ApplicGarageWindow::on_actionLogin_triggered()
 {
     // TO DO (étape 11)
     cout << ">>> Clic sur item Login <<<" << endl;
+
+    string login = dialogPromptText("Login", "Entrez votre login :");
+    if (login.empty())
+    {
+        dialogError("Login", "Le login ne peut pas être vide.");
+        return;
+    }
+
+    Employee found;
+    bool ok = false;
+
+    int i = 0;
+    for (;; i++)
+    {
+        Employee e = Garage::getInstance().findEmployeeByIndex(i);
+        if (e.getId() == 0) break;
+        if (e.getLogin() == login)
+        {
+            found = e;
+            ok = true;
+            break;
+        }
+    }
+
+    if (!ok)
+    {
+        dialogError("Login", "Aucun employé avec ce login.");
+        return;
+    }
+
+    Garage::idLoggedEmployee = found.getId();
+
+    try
+    {
+        string pwd = found.getPassword();        
+        string saisie = dialogPromptText("Login", "Mot de passe :");
+
+        if (saisie != pwd)
+        {
+            dialogError("Login", "Mot de passe incorrect.");
+            Garage::idLoggedEmployee = -1;
+            return;
+        }
+    }
+
+    catch (PasswordException &e)
+    {
+        dialogMessage("Mot de passe","Vous n'avez pas encore de mot de passe, vous devez en définir un.");
+
+        bool okPwd = false;
+        while (!okPwd)
+        {
+            string newPwd = dialogPromptText("Mot de passe","Encodez un nouveau mot de passe :");
+            try
+            {
+                found.setPassword(newPwd);
+                Garage &g = Garage::getInstance();
+                g.deleteEmployeeById(found.getId());
+                g.addEmployee(found.getLastName(), found.getFirstName(), found.getLogin(), found.getRole(), found.getId(), &newPwd);
+                okPwd = true;
+            }
+            catch (PasswordException &pe)
+            {
+                dialogError("Mot de passe ", pe.getmsg().c_str());
+            }
+        }
+    }
+
+    if (found.getRole() == Employee::ADMINISTRATIVE)
+        setRole(1);
+    else
+        setRole(2);
+
+    string titre = found.getLastName() + " " + found.getFirstName();
+    setTitle(titre);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1001,6 +1135,44 @@ void ApplicGarageWindow::on_actionLogout_triggered()
 {
     // TO DO (étape 11)
     cout << ">>> Clic sur item Logout <<<" << endl;
+
+    setTitle("Application Garage");
+
+    setRole(0);
+
+    clearTableEmployees();
+    clearTableClients();
+    clearTableContracts();
+    clearTableOption();
+
+
+    auto& g = Garage::getInstance();
+
+    g.importModelsFromCsv(ModCSV);
+    g.importOptionsFromCsv(OptCSV);
+
+    int i = 0;
+    do
+    {
+        Model m = g.getModel(i);
+        i++;
+        if (m.getImage().empty())
+            break;
+        addAvailableModel(m.getName(), m.getBasePrice());
+    } while(true);
+
+    i = 0;
+    do
+    {
+        Option o = g.getOption(i);
+        i++;
+        if (o.getCode().empty())
+            break;
+        addAvailableOption(o.getLabel(), o.getPrice());
+    } while(true);
+
+    Garage::idLoggedEmployee = -1;
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1008,6 +1180,29 @@ void ApplicGarageWindow::on_actionResetPassword_triggered()
 {
     // TO DO (étape 11)
     cout << ">>> clic sur item ResetPassword <<<" << endl;
+
+    int id = Garage::idLoggedEmployee;
+    if (id == -1)
+    {
+        dialogError("Reset mot de passe","Aucun employé n'est actuellement connecté.");
+        return;
+    }
+
+    Garage &g = Garage::getInstance();
+    Employee e = g.findEmployeeById(id);
+    if (e.getId() == 0)
+    {
+        dialogError("Reset mot de passe","Employé connecté introuvable.");
+        return;
+    }
+
+    e.resetPassword();
+
+    g.deleteEmployeeById(id);
+    g.displayEmployees();
+    g.updateEmployee(e, id);
+
+    dialogMessage("Reset mot de passe","Votre mot de passe a été réinitialisé.");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1204,6 +1399,8 @@ void ApplicGarageWindow::on_pushButtonSaveProject_clicked()
         return;
     }
 
+    c.display();
+
     c.setName(nomProjet);
 
     c.save();
@@ -1280,9 +1477,6 @@ void ApplicGarageWindow::on_pushButtonNewProject_clicked()
         addAvailableModel(m.getName(), m.getBasePrice());
     } while(true);
 
-
-    // Importation des options (étape 10)
-
     clearTableOption();
     i = 0;
     do
@@ -1293,6 +1487,25 @@ void ApplicGarageWindow::on_pushButtonNewProject_clicked()
             break;
         addAvailableOption(o.getLabel(), o.getPrice());
     } while(true);
+
+    // Employee / Client
+
+    for (int i = 0; ; i++)
+    {
+        Employee e = Garage::getInstance().findEmployeeByIndex(i);
+        if (e.getId() == 0) break;
+        addTupleTableEmployees(e.tuple());
+    }
+
+    for (int i = 0;; i++)
+    {
+        Client cl = Garage::getInstance().findClientByIndex(i);
+        if (cl.getId() == 0)
+            break;
+
+
+        addTupleTableClients(cl.tuple());
+    }
 
 }
 
