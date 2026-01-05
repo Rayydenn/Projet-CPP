@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Contract.h
+string
+-
+
+/home/student/Bureau/Projet-CPP/Etape13/src/Contract.cpp
+Contract.h
+/home/student/Bureau/Projet-CPP/Etape13/src/Contract.h
+sstream
+-
+ostream
+-
+istream
+-
+

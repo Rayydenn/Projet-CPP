@@ -32,6 +32,20 @@ Option::Option(const Option& source)
 /*										GETTERS/SETTERS										  */
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+string Option::getCode() const
+{
+	return Code;
+}
+
+float Option::getPrice() const
+{
+	return Prix;
+}
+
+string Option::getLabel() const
+{
+	return Label;
+}
 
 void Option::setCode(const string c)
 {
@@ -46,21 +60,6 @@ void Option::setLabel(const string l)
 void Option::setPrice(const float p)
 {
 	Prix = p;
-}
-
-string Option::getCode() const
-{
-	return Code;
-}
-
-float Option::getPrice() const
-{
-	return Prix;
-}
-
-string Option::getLabel() const
-{
-	return Label;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,7 +83,7 @@ istream& operator>>(istream& is, Option& opt)
 	getline(is, line);	// /Label
 	getline(is, line);	// price
 	getline(is, line);	// var price
-	opt.Prix = stof(line);	// copier price
+	opt.setPrice(stof(line));	// copier price
 	getline(is, line);	// /price
 	getline(is, line);	// /option
 

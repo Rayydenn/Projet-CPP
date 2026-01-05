@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Car>
+<Nom>
+asd
+</Nom>
+<Model>
+<Nom>
+208 Active 1.5 BlueHDi 100
+</Nom>
+<Power>
+100
+</Power>
+<Price>
+20250
+</Price>
+<Engine>
+1
+</Engine>
+<Image>
+208.jpg
+</Image>
+</Model>
+<Options>
+<Option>
+<code>
+0MM0
+</code>
+<Label>
+Peinture metallisee
+</Label>
+<Price>
+400
+</Price>
+</Option>
+</Options>
+</Car>

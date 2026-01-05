@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Car>
+<Nom>
+adw
+</Nom>
+<Model>
+<Nom>
+508 Allure 1.6 PureTech
+</Nom>
+<Power>
+180
+</Power>
+<Price>
+38800
+</Price>
+<Engine>
+0
+</Engine>
+<Image>
+508.jpg
+</Image>
+</Model>
+<Options>
+<Option>
+<code>
+0MM0
+</code>
+<Label>
+Peinture metallisee
+</Label>
+<Price>
+400
+</Price>
+</Option>
+<Option>
+<code>
+J2U7
+</code>
+<Label>
+Pack Cool Air conditionne
+</Label>
+<Price>
+900
+</Price>
+</Option>
+</Options>
+</Car>

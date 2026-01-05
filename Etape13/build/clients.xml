@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Clients>
+<Client>
+<lastName>
+Test
+</lastName>
+<firstName>
+test
+</firstName>
+<id>
+2
+</id>
+<gsm>
+0473720851
+</gsm>
+</Client>
+
+</Clients>
