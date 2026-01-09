@@ -93,25 +93,21 @@ istream& operator>>(istream& is, Client& c)
         if (line == "<Client>") break;
     }
 
-    // <lastName>
     getline(is, line);  // <lastName>
     getline(is, line);
     c.setLastName(line);
     getline(is, line);  // </lastName>
 
-    // <firstName>
     getline(is, line);  // <firstName>
     getline(is, line);
     c.setFirstName(line);
     getline(is, line);  // </firstName>
 
-    // <id>
     getline(is, line);  // <id>
     getline(is, line);
     c.setId(stoi(line));
     getline(is, line);  // </id>
 
-    // <gsm>
     getline(is, line);  // <gsm>
     getline(is, line);
     c.setGsm(line);

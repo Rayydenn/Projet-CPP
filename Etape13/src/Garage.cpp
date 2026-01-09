@@ -362,7 +362,6 @@ void Garage::importModelsFromCsv(string filename)
 		getline(iss, image, ';');
 		getline(iss, basePriceStr, ';');
 
-		// creer un model pour la combobox
 		Model m;
 
 		m.setName(name.c_str());
@@ -371,7 +370,6 @@ void Garage::importModelsFromCsv(string filename)
 		m.setPower(stoi(powerStr));
 		m.setImage(image);
 
-		// créer une liste pour que quand on appelle cette fonction dans applicgarage on peut parcourir la liste
 		addModel(m);
 
 	}
@@ -395,7 +393,6 @@ void Garage::importOptionsFromCsv(string filename)
 		getline(iss, label, ';');
 		getline(iss, priceStr, ';');
 
-		// creer une option pour la combobox
 		Option o;
 		try
 		{
@@ -408,7 +405,6 @@ void Garage::importOptionsFromCsv(string filename)
 	        cout << op.getmsg();
 		}
 
-		// Liste pour l'appel dans ApplicGarage.cpp
 		addOption(o);
 
 	}

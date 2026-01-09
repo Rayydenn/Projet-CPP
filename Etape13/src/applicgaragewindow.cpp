@@ -1118,9 +1118,66 @@ void ApplicGarageWindow::on_actionLogin_triggered()
     }
 
     if (found.getRole() == Employee::ADMINISTRATIVE)
+    {
+        clearTableEmployees();
+        clearTableClients();
+        clearTableContracts();
         setRole(1);
+        auto& grg = Garage::getInstance();
+        grg.load();
+
+        int nbE = grg.getNbEmployees();
+        for (int i = 0; i < nbE; ++i)
+        {
+            Employee e = grg.findEmployeeByIndex(i);
+            addTupleTableEmployees(e.tuple());
+        }
+
+        int nbC = grg.getNbClients();
+        for (int i= 0; i < nbC; ++i)
+        {
+            Client c = grg.findClientByIndex(i);
+            addTupleTableClients(c.tuple());
+        }
+
+    }
     else
+    {
+        clearTableEmployees();
+        clearTableClients();
+        clearTableContracts();
         setRole(2);
+        auto& grg = Garage::getInstance();
+
+        int nbE = grg.getNbEmployees();
+        for (int i = 0; i < nbE; ++i)
+        {
+            Employee e = grg.findEmployeeByIndex(i);
+            addTupleTableEmployees(e.tuple());
+        }
+
+        int nbC = grg.getNbClients();
+        for (int i= 0; i < nbC; ++i)
+        {
+            Client c = grg.findClientByIndex(i);
+            addTupleTableClients(c.tuple());
+        }
+
+
+        int nb = grg.getNbContracts();
+        for (int i = 0; i < nb; ++i)
+        {
+            Contract c = grg.findContractByIndex(i);
+        
+            Employee s = grg.findEmployeeById(c.getIdSeller());
+            Client   cl = grg.findClientById(c.getIdClient());
+
+            string sellerName = s.getLastName() + " " + s.getFirstName();
+            string clientName = cl.getLastName() + " " + cl.getFirstName();
+            addTupleTableContracts(c.tuple(sellerName, clientName));
+        }
+
+    }
 
     string titre = found.getLastName() + " " + found.getFirstName();
     setTitle(titre);

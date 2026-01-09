@@ -74,17 +74,20 @@ istream& operator>>(istream& is, Option& opt)
 
 	getline(is, line);	// Option
 	getline(is, line);	// Code
-	getline(is, line);	// la variable Code
-	opt.setCode(line);	// on copie la variable dans l'option
+	getline(is, line)
+	opt.setCode(line);
 	getline(is, line);	// /Code
+
 	getline(is, line);	// Label
-	getline(is, line);	// var label
-	opt.setLabel(line);	// copier
+	getline(is, line);
+	opt.setLabel(line);
 	getline(is, line);	// /Label
+
 	getline(is, line);	// price
-	getline(is, line);	// var price
-	opt.setPrice(stof(line));	// copier price
+	getline(is, line);
+	opt.setPrice(stof(line));
 	getline(is, line);	// /price
+	
 	getline(is, line);	// /option
 
 	return is;

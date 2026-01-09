@@ -181,38 +181,38 @@ istream& operator>>(istream& is, Model& m)
 
 	getline(is, line); // <Model>
     
-    // Nom
+
     getline(is, line); // <Nom>
-    getline(is, line); // nom
+    getline(is, line);
     m.setName(line.c_str());
     getline(is, line); // </Nom>
 
-    // Power
+
     getline(is, line); // <Power>
-    getline(is, line); // ligne = "68"
+    getline(is, line);
     m.setPower(stoi(line));
     getline(is, line); // </Power>
 
-    // Price
+
     getline(is, line); // <Price>
-    getline(is, line); // ligne = "12500"
+    getline(is, line);
     m.setBasePrice(stof(line));
     getline(is, line); // </Price>
 
-    // Engine
+
     getline(is, line); // <Engine>
-    getline(is, line); // ligne = "0"
+    getline(is, line);
     m.setEngine(stoi(line));
     getline(is, line); // </Engine>
 
     getline(is, line); // <Image>
-    getline(is, line); // la varible
+    getline(is, line);
     m.setImage(line);
     getline(is, line); // </Image>
 
     getline(is, line); // </Model>
 
-	return is;
+    return is;
 }
 
 ostream& operator<<(ostream& os, const Model& m)

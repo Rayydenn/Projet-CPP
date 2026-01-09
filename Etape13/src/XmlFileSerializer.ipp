@@ -37,8 +37,8 @@ XmlFileSerializer<T>::XmlFileSerializer(const string& fn, const char m, const st
 		}
 		string line;
 		getline(file, line);
-		getline(file, line); // On recupere le <collectionName> dans line
-		line = line.substr(1, line.length() - 2); // on enleve les "< >"
+		getline(file, line); // <CollectionName>
+		line = line.substr(1, line.length() - 2); // supression <>
 		collectionName = line;
 	}
 }
@@ -68,8 +68,8 @@ XmlFileSerializer<T>::XmlFileSerializer(const string& fN, char m)
 		}
 		string line;
 		getline(file, line);
-		getline(file, line); // On recupere le <collectionName> dans line
-		line = line.substr(1, line.length() - 2); // on enleve les "< >"
+		getline(file, line);
+		line = line.substr(1, line.length() - 2);
 		collectionName = line;
 	}
 }
