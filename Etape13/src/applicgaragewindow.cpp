@@ -1124,7 +1124,6 @@ void ApplicGarageWindow::on_actionLogin_triggered()
         clearTableContracts();
         setRole(1);
         auto& grg = Garage::getInstance();
-        grg.load();
 
         int nbE = grg.getNbEmployees();
         for (int i = 0; i < nbE; ++i)

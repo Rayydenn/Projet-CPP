@@ -74,7 +74,7 @@ istream& operator>>(istream& is, Option& opt)
 
 	getline(is, line);	// Option
 	getline(is, line);	// Code
-	getline(is, line)
+	getline(is, line);
 	opt.setCode(line);
 	getline(is, line);	// /Code
 
@@ -87,7 +87,7 @@ istream& operator>>(istream& is, Option& opt)
 	getline(is, line);
 	opt.setPrice(stof(line));
 	getline(is, line);	// /price
-	
+
 	getline(is, line);	// /option
 
 	return is;
