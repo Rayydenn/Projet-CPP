@@ -152,7 +152,7 @@ ApplicGarageWindow::ApplicGarageWindow(QWidget *parent) : QMainWindow(parent),ui
         addTupleTableContracts(c.tuple(sellerName, clientName));
     }
 
-    setRole();
+    setRole(0);
 }
 
 ApplicGarageWindow::~ApplicGarageWindow()

@@ -105,6 +105,15 @@ void   Garage::deleteClientByIndex(int index)
 {
 	auto it = clients.cbegin();
 	advance(it, index);
+
+	int id = it->getId();
+
+    if (hasContractsForClient(id))
+    {
+        cout << "Impossible de supprimer ce vendeur: contrats existants" << endl;
+        return;
+    }
+
 	if (it != clients.cend())
 	{
 		cout << "Deleting [C " << index << "] " << it->toString() << " (ID: " << it->getId() << ")" << endl;
@@ -116,6 +125,12 @@ void   Garage::deleteClientByIndex(int index)
 
 void   Garage::deleteClientById(int id)
 {
+	if (hasContractsForClient(id))
+	{
+	    cout << "Impossible de supprimer ce client: contrats existants" << endl;
+	    
+	    return;
+	}
 	auto it = clients.cbegin();
 	while (it != clients.cend() && it->getId() != id)
 	{
@@ -130,12 +145,6 @@ void   Garage::deleteClientById(int id)
 	else
 		cout << "id hors limite" << endl;
 
-	if (hasContractsForClient(id))
-	{
-	    cout << "Impossible de supprimer ce client: contrats existants" << endl;
-	    
-	    return;
-	}
 
 
 }
@@ -191,19 +200,14 @@ int Garage::getNbClients()const
 
 int Garage::addEmployee(string lastName,string firstName,string login, string role, int id, string* Password)
 {
-	int finalId;
-	if (id == 0)
-		finalId = ++Actor::currentId;
-	else
-		finalId = id;
-
-	Employee e(lastName, firstName, finalId, login, role);
+	Employee e(lastName, firstName, Actor::currentId, login, role);
 
 	if (Password != nullptr)
 		e.setPassword(*Password);
 
 	employees.insert(e);
 	cout << "Employee Id: " << Actor::currentId << endl;
+	Actor::currentId++;
 	return 1;
 }
 
@@ -244,6 +248,15 @@ void     Garage::deleteEmployeeByIndex(int index)
 {
 	auto it = employees.cbegin();
 	advance(it, index);
+
+	int id = it->getId();
+
+    if (hasContractsForSeller(id))
+    {
+        cout << "Impossible de supprimer ce vendeur: contrats existants" << endl;
+        return;
+    }
+
 	if (it != employees.cend())
 	{
 		cout << "Deleting [E " << index << "] " << it->toString() << " (ID: " << it->getId() << ")" << endl;
@@ -255,6 +268,11 @@ void     Garage::deleteEmployeeByIndex(int index)
 
 void     Garage::deleteEmployeeById(int id)
 {
+	if (hasContractsForSeller(id))
+	{
+	    cout << "Impossible de supprimer ce vendeur: contrats existants" << endl;
+	    return;
+	}
 	auto it = employees.cbegin();
 	while (it != employees.cend() && it->getId() != id)
 	{
@@ -269,11 +287,6 @@ void     Garage::deleteEmployeeById(int id)
 	else
 		cout << "id hors limite" << endl;
 
-	if (hasContractsForSeller(id))
-	{
-	    cout << "Impossible de supprimer ce vendeur: contrats existants" << endl;
-	    return;
-	}
 
 }
 
@@ -532,7 +545,9 @@ int Garage::load()
 			{
 				Employee e = fe->read();
 				if (e.getLogin() != "admin")
-					addEmployee(e.getLastName(), e.getFirstName(), e.getLogin(), e.getRole());
+					employees.insert(e);
+				if (e.getId() >= Actor::currentId)
+					Actor::currentId = e.getId() + 1;
 			}
 			catch (const XmlFileSerializerException& x)
 			{
@@ -570,7 +585,9 @@ int Garage::load()
 			try
 			{
 				Client c = fc->read();
-				addClient(c.getLastName(), c.getFirstName(), c.getGsm());
+				clients.insert(c);
+				if (c.getId() >= Actor::currentId)
+					Actor::currentId = c.getId() + 1;
 			}
 			catch (const XmlFileSerializerException &x)
 			{
